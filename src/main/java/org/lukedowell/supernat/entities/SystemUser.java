@@ -1,8 +1,6 @@
 package org.lukedowell.supernat.entities;
 
 import org.hibernate.annotations.GenericGenerator;
-import sun.security.util.Password;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,7 +22,30 @@ public class SystemUser {
 
     private String name;
 
-    private Password password;
+    private String password;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 //    private String salt;
 }

@@ -2,10 +2,7 @@ package org.lukedowell.supernat.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -26,10 +23,50 @@ public class Game {
 
     private String title;
 
-    @ManyToOne
+    @OneToOne
     private Genre genre;
 
     private Date createdOn;
 
     private boolean isOwned;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public boolean isOwned() {
+        return isOwned;
+    }
+
+    public void setOwned(boolean owned) {
+        isOwned = owned;
+    }
 }

@@ -20,9 +20,9 @@ public class Race {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
-    @ManyToOne
+    @OneToOne
     private Election election;
 
-    @ManyToOne
+    @OneToOne
     private Genre genre;
 }
