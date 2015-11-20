@@ -15,10 +15,15 @@ public class WebController {
     @Value("${application.title}")
     private String title;
 
+    @RequestMapping("/home")
+    public String home(Map<String, Object> model) {
+        return "secured";
+    }
+
     @RequestMapping("/")
     public String index(Map<String, Object> model) {
         model.put("title", this.title);
-        return "index";
+        return "login";
     }
 
 
