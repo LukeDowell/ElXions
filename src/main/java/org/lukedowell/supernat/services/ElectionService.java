@@ -19,7 +19,6 @@ public class ElectionService {
     ElectionRepository electionRepository;
 
     public Election addElection(Election election) {
-        //TODO: if getRunningElections() != null
         return electionRepository.save(election);
     }
 
