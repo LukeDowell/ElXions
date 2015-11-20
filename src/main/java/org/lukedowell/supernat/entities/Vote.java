@@ -30,7 +30,7 @@ public class Vote {
 
     public Vote() {}
 
-    public Vote(Game game, SystemUser user, Race race) {
+    public Vote(Game game, Race race, SystemUser user) {
         this.game = game;
         this.systemUser = user;
         this.race = race;

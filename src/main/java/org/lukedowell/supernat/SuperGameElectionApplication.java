@@ -7,6 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 @SpringBootApplication
 public class SuperGameElectionApplication implements CommandLineRunner{
@@ -34,22 +37,34 @@ public class SuperGameElectionApplication implements CommandLineRunner{
     public void run(String... args) throws Exception {
 
         Election election = new Election("Video Game Elections");
-        electionRepository.save(election);
 
         Race actionRace = new Race("Best Action Game", election);
-        raceRepository.save(actionRace);
+        Race strategyRace = new Race("Best Strategy Game", election);
 
         Game funGame = new Game("Fun Game");
-        gameRepository.save(funGame);
-
         Game boringGame = new Game("Boring Game");
-        gameRepository.save(boringGame);
 
         SystemUser user = new SystemUser("user", "pass");
-        systemUserRepository.save(user);
+        SystemUser admin = new SystemUser("admin", "pass");
 
-        Vote vote = new Vote(funGame, user, actionRace);
-        voteRepository.save(vote);
+        Vote vote1 = new Vote(funGame, user, actionRace);
+        Vote vote2 = new Vote(funGame, admin, actionRace);
+        Vote vote3 = new Vote(boringGame, user, strategyRace);
+
+        electionRepository.save(election);
+
+        raceRepository.save(actionRace);
+        raceRepository.save(strategyRace);
+
+        gameRepository.save(funGame);
+        gameRepository.save(boringGame);
+
+        systemUserRepository.save(user);
+        systemUserRepository.save(admin);
+
+        voteRepository.save(vote1);
+        voteRepository.save(vote2);
+        voteRepository.save(vote3);
 
     }
 }
