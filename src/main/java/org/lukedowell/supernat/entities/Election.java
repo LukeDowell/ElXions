@@ -41,6 +41,17 @@ public class Election {
         this(title, new Date(), endDate);
     }
 
+    public Election(String title) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.get(Calendar.YEAR), Calendar.NOVEMBER, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        Date endOfMonth = calendar.getTime();
+
+        this.title = title;
+        this.startDate = new Date();
+        this.endDate = endOfMonth;
+    }
+
     public Election(String title, Date startDate, Date endDate) {
         this.title = title;
         this.startDate = startDate;

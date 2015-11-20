@@ -31,4 +31,51 @@ public class Race {
 
     @OneToMany
     private Collection<Vote> votes;
+
+    public Race() {}
+
+    public Race(String title, Election election) {
+        this.title = title;
+        this.election = election;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Election getElection() {
+        return election;
+    }
+
+    public void setElection(Election election) {
+        this.election = election;
+    }
+
+    public Collection<Game> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(Collection<Game> candidates) {
+        this.candidates = candidates;
+    }
+
+    public Collection<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Collection<Vote> votes) {
+        this.votes = votes;
+    }
 }

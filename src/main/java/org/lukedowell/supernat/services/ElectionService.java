@@ -1,7 +1,6 @@
 package org.lukedowell.supernat.services;
 
 import org.lukedowell.supernat.entities.Election;
-import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.repositories.ElectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
