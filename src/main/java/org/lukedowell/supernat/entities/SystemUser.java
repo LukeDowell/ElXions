@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.Collection;
 
 /**
  *
@@ -19,6 +21,9 @@ public class SystemUser {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
+
+    @OneToMany
+    private Collection<Vote> votes;
 
     private String name;
 
@@ -47,5 +52,4 @@ public class SystemUser {
     public void setPassword(String password) {
         this.password = password;
     }
-//    private String salt;
 }

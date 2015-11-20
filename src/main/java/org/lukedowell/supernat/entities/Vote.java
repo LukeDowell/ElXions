@@ -19,12 +19,12 @@ public class Vote {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
-    @OneToOne
+    @ManyToOne
     private Game game;
 
-    @OneToOne
+    @ManyToOne
     private SystemUser systemUser;
 
-    @OneToOne
+    @ManyToOne
     private Race race;
 }

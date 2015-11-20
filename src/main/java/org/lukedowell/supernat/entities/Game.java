@@ -3,7 +3,7 @@ package org.lukedowell.supernat.entities;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Collection;
 
 /**
  *
@@ -21,14 +21,16 @@ public class Game {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
+    @OneToMany
+    private Collection<Vote> votes;
+
     private String title;
 
-    @OneToOne
-    private Genre genre;
+    public Game() {}
 
-    private Date createdOn;
-
-    private boolean isOwned;
+    public Game(String title) {
+        this.title = title;
+    }
 
     public long getId() {
         return id;
@@ -44,29 +46,5 @@ public class Game {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public Date getCreatedOn() {
-        return createdOn;
-    }
-
-    public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
-    }
-
-    public boolean isOwned() {
-        return isOwned;
-    }
-
-    public void setOwned(boolean owned) {
-        isOwned = owned;
     }
 }

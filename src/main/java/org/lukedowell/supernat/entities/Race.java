@@ -3,6 +3,7 @@ package org.lukedowell.supernat.entities;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  *
@@ -20,9 +21,14 @@ public class Race {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
-    @OneToOne
+    private String title;
+
+    @ManyToOne
     private Election election;
 
-    @OneToOne
-    private Genre genre;
+    @OneToMany
+    private Collection<Game> candidates;
+
+    @OneToMany
+    private Collection<Vote> votes;
 }
