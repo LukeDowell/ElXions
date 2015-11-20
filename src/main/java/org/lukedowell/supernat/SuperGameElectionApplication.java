@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 
 
 @SpringBootApplication
@@ -47,8 +47,8 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         SystemUser user = new SystemUser("user", "pass");
         SystemUser admin = new SystemUser("admin", "pass");
 
-        actionRace.setCandidates(Arrays.asList(funGame));
-        strategyRace.setCandidates(Arrays.asList(boringGame));
+        actionRace.setCandidates(Collections.singletonList(funGame));
+        strategyRace.setCandidates(Collections.singletonList(boringGame));
 
         Vote vote1 = new Vote(funGame, actionRace, user);
         Vote vote2 = new Vote(funGame, actionRace, admin);

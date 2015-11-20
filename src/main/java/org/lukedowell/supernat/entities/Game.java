@@ -1,7 +1,5 @@
 package org.lukedowell.supernat.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

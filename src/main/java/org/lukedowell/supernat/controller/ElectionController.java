@@ -22,24 +22,30 @@ public class ElectionController {
     public Response<Election> createElection(@RequestBody(required = false) Election election, @PathVariable String title) {
         Response<Election> response;
         if(election != null) {
-            response = new Response<Election>(electionService.addElection(election));
+
+            response = new Response<>(electionService.addElection(election));
+
         } else if(title != null) {
-            response = new Response<Election>(electionService.addElection(new Election(title)));
+
+            response = new Response<>(electionService.addElection(new Election(title)));
+
         } else {
-            response = new Response<Election>(Response.FAILED,
+
+            response = new Response<>(Response.FAILED,
                     "There was a problem with your input. Please try again.",
                     null);
+
         }
         return response;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public Response<Collection<Election>> getElections() {
-        return new Response<Collection<Election>>(electionService.getAllElections());
+        return new Response<>(electionService.getAllElections());
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/running")
     public Response<Election> getRunningElection() {
-        return new Response<Election>(electionService.getRunningElections());
+        return new Response<>(electionService.getRunningElections());
     }
 }

@@ -5,7 +5,10 @@ import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
@@ -24,11 +27,11 @@ public class GameController {
 
     @RequestMapping(method=RequestMethod.POST, value="/{title}")
     public Response<Game> add(@PathVariable String title) {
-        return new Response<Game>(gameService.addGame(new Game(title)));
+        return new Response<>(gameService.addGame(new Game(title)));
     }
 
     @RequestMapping(method=RequestMethod.GET)
     public Response<Collection<Game>> get() {
-        return new Response<Collection<Game>>(gameService.getAllGames());
+        return new Response<>(gameService.getAllGames());
     }
 }

@@ -2,7 +2,6 @@ package org.lukedowell.supernat.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
 

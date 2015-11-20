@@ -27,7 +27,7 @@ public class ElectionService {
     }
 
     public Collection<Election> getAllElections() {
-        List<Election> elections = new ArrayList<Election>();
+        List<Election> elections = new ArrayList<>();
         for(Election e : electionRepository.findAll()) {
             elections.add(e);
         }

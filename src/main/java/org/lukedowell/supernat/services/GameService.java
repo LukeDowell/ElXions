@@ -1,6 +1,5 @@
 package org.lukedowell.supernat.services;
 
-import org.lukedowell.supernat.domain.Response;
 import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class GameService {
      * Every game we have
      */
     public Collection<Game> getAllGames() {
-        List<Game> games = new ArrayList<Game>();
+        List<Game> games = new ArrayList<>();
         for(Game g : gameRepository.findAll()) {
             games.add(g);
         }
