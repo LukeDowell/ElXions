@@ -40,6 +40,6 @@ public class ElectionController {
 
     @RequestMapping(method = RequestMethod.GET, value="/running")
     public Response<Election> getRunningElection() {
-        return new Response<Election>(electionService.getRunningElection());
+        return new Response<Election>(electionService.getRunningElections());
     }
 }

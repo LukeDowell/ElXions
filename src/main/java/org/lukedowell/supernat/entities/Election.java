@@ -2,10 +2,7 @@ package org.lukedowell.supernat.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -13,8 +10,6 @@ import java.util.Date;
 /**
  * An Election is the wrapper that contains a bunch of races. An election has
  * an end date which usually is the end of the month.
- *
- * Only one election may be running at a time.
  *
  * Created by ldowell on 11/19/15.
  */
@@ -26,8 +21,8 @@ public class Election {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
-    @OneToMany
-    private Collection<Race> races;
+    @OneToMany(mappedBy = "election", targetEntity = Race.class)
+    private Collection races;
 
     private String title;
 

@@ -1,5 +1,7 @@
 package org.lukedowell.supernat.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,20 +19,28 @@ import java.util.Collection;
 public class Race {
 
     @Id
+    @Column(name = "RACE_ID", nullable = false)
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private long id;
+    private long raceId;
 
     private String title;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "electionId")
+    @JsonIgnore
     private Election election;
 
-    @OneToMany
-    private Collection<Game> candidates;
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Game.class)
+    @JoinTable(name = "RACE_CANDIDATES",
+            joinColumns=
+            @JoinColumn(name="RACE_ID", referencedColumnName = "RACE_ID"),
+            inverseJoinColumns =
+            @JoinColumn(name="GAME_ID", referencedColumnName = "GAME_ID"))
+    private Collection candidates;
 
-    @OneToMany
-    private Collection<Vote> votes;
+    @OneToMany(targetEntity = Vote.class, mappedBy = "race")
+    private Collection votes;
 
     public Race() {}
 
@@ -39,12 +49,17 @@ public class Race {
         this.election = election;
     }
 
+    @JsonProperty(value = "electionId")
+    public long getElectionId() {
+        return election.getId();
+    }
+
     public long getId() {
-        return id;
+        return raceId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.raceId = id;
     }
 
     public String getTitle() {

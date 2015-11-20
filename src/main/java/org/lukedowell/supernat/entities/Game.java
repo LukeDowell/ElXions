@@ -1,5 +1,7 @@
 package org.lukedowell.supernat.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,12 +19,16 @@ import java.util.Collection;
 public class Game {
 
     @Id
+    @Column(name = "GAME_ID", nullable = false)
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private long id;
+    private long gameId;
 
-    @OneToMany
-    private Collection<Vote> votes;
+    @OneToMany(mappedBy = "game", targetEntity = Vote.class)
+    private Collection votes;
+
+    @ManyToMany(mappedBy = "candidates", targetEntity = Race.class, fetch = FetchType.EAGER)
+    private Collection races;
 
     private String title;
 
@@ -33,11 +39,11 @@ public class Game {
     }
 
     public long getId() {
-        return id;
+        return gameId;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.gameId = id;
     }
 
     public String getTitle() {

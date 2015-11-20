@@ -19,12 +19,12 @@ public class ElectionService {
     ElectionRepository electionRepository;
 
     public Election addElection(Election election) {
-        //TODO: if getRunningElection() != null
+        //TODO: if getRunningElections() != null
         return electionRepository.save(election);
     }
 
-    public Election getRunningElection() {
-        return electionRepository.getRunningElection();
+    public Election getRunningElections() {
+        return electionRepository.getRunningElections();
     }
 
     public Collection<Election> getAllElections() {

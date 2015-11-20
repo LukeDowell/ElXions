@@ -19,7 +19,7 @@ public class RaceService {
     ElectionService electionService;
 
     public Race createRace(String title) {
-        return createRace(title, electionService.getRunningElection());
+        return createRace(title, electionService.getRunningElections());
     }
 
     public Race createRace(String title, Election election) {

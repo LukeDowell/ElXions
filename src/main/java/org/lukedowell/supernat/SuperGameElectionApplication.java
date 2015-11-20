@@ -47,24 +47,27 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         SystemUser user = new SystemUser("user", "pass");
         SystemUser admin = new SystemUser("admin", "pass");
 
+        actionRace.setCandidates(Arrays.asList(funGame));
+        strategyRace.setCandidates(Arrays.asList(boringGame));
+
         Vote vote1 = new Vote(funGame, actionRace, user);
         Vote vote2 = new Vote(funGame, actionRace, admin);
         Vote vote3 = new Vote(boringGame, strategyRace, user);
 
-        electionRepository.save(election);
+        funGame = gameRepository.save(funGame);
+        boringGame = gameRepository.save(boringGame);
 
-        raceRepository.save(actionRace);
-        raceRepository.save(strategyRace);
 
-        gameRepository.save(funGame);
-        gameRepository.save(boringGame);
+        election = electionRepository.save(election);
 
-        systemUserRepository.save(user);
-        systemUserRepository.save(admin);
+        actionRace = raceRepository.save(actionRace);
+        strategyRace = raceRepository.save(strategyRace);
 
-        voteRepository.save(vote1);
-        voteRepository.save(vote2);
-        voteRepository.save(vote3);
+        user = systemUserRepository.save(user);
+        admin = systemUserRepository.save(admin);
 
+        vote1 = voteRepository.save(vote1);
+        vote2 = voteRepository.save(vote2);
+        vote3 = voteRepository.save(vote3);
     }
 }

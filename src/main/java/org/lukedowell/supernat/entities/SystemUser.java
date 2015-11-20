@@ -1,10 +1,8 @@
 package org.lukedowell.supernat.entities;
 
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
@@ -22,8 +20,8 @@ public class SystemUser {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
-    @OneToMany
-    private Collection<Vote> votes;
+    @OneToMany(mappedBy = "systemUser", targetEntity = Vote.class)
+    private Collection votes;
 
     private String name;
 

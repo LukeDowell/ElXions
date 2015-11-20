@@ -13,5 +13,5 @@ public interface ElectionRepository extends CrudRepository<Election, Long> {
 
 
     @Query("SELECT e FROM Election e WHERE CURRENT_TIME between e.startDate and e.endDate")
-    Election getRunningElection();
+    Election getRunningElections();
 }

@@ -1,6 +1,8 @@
 package org.lukedowell.supernat.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 import javax.persistence.*;
 
@@ -19,13 +21,19 @@ public class Vote {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "gameId")
+    @JsonIgnore
     private Game game;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "systemUserId")
+    @JsonIgnore
     private SystemUser systemUser;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "raceId")
+    @JsonIgnore
     private Race race;
 
     public Vote() {}
