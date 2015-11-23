@@ -8,11 +8,6 @@ import javax.persistence.*;
 import java.util.Collection;
 
 /**
- *
- * A race attaches itself to an election period and a genre. Many games
- * can be voted on in the race as long as they share the same genre. A
- * race ends at the same time as an election.
- *
  * Created by ldowell on 11/19/15.
  */
 @Entity

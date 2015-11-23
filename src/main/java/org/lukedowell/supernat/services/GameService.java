@@ -2,6 +2,7 @@ package org.lukedowell.supernat.services;
 
 import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.repositories.GameRepository;
+import org.lukedowell.supernat.services.interfaces.IGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by ldowell on 11/19/15.
  */
 @Service
-public class GameService {
+public class GameService implements IGameService {
 
     @Autowired
     GameRepository gameRepository;
@@ -24,6 +25,7 @@ public class GameService {
      * @return
      *      The game that was added
      */
+    @Override
     public Game addGame(Game game) {
         return gameRepository.save(game);
     }
@@ -32,6 +34,7 @@ public class GameService {
      * @return
      * Every game we have
      */
+    @Override
     public Collection<Game> getAllGames() {
         List<Game> games = new ArrayList<>();
         for(Game g : gameRepository.findAll()) {

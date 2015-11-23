@@ -2,6 +2,7 @@ package org.lukedowell.supernat.services;
 
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.repositories.ElectionRepository;
+import org.lukedowell.supernat.services.interfaces.IElectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,19 +14,22 @@ import java.util.List;
  * Created by ldowell on 11/20/15.
  */
 @Service
-public class ElectionService {
+public class ElectionService implements IElectionService {
 
     @Autowired
     ElectionRepository electionRepository;
 
+    @Override
     public Election addElection(Election election) {
         return electionRepository.save(election);
     }
 
-    public Election getRunningElections() {
+    @Override
+    public Collection<Election> getRunningElections() {
         return electionRepository.getRunningElections();
     }
 
+    @Override
     public Collection<Election> getAllElections() {
         List<Election> elections = new ArrayList<>();
         for(Election e : electionRepository.findAll()) {

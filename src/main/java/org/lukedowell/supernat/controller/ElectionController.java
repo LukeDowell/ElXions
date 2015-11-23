@@ -2,7 +2,7 @@ package org.lukedowell.supernat.controller;
 
 import org.lukedowell.supernat.domain.Response;
 import org.lukedowell.supernat.entities.Election;
-import org.lukedowell.supernat.services.ElectionService;
+import org.lukedowell.supernat.services.interfaces.IElectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import java.util.Collection;
 public class ElectionController {
 
     @Autowired
-    ElectionService electionService;
+    IElectionService electionService;
 
     @RequestMapping(method = RequestMethod.POST, value="/{title}")
     public Response<Election> createElection(@RequestBody(required = false) Election election, @PathVariable String title) {
@@ -45,7 +45,7 @@ public class ElectionController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/running")
-    public Response<Election> getRunningElection() {
+    public Response<Collection<Election>> getRunningElections() {
         return new Response<>(electionService.getRunningElections());
     }
 }

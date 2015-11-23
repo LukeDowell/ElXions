@@ -26,20 +26,14 @@ public class Vote {
     private Game game;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "systemUserId")
-    @JsonIgnore
-    private SystemUser systemUser;
-
-    @ManyToOne(optional = false)
     @JoinColumn(name = "raceId")
     @JsonIgnore
     private Race race;
 
     public Vote() {}
 
-    public Vote(Game game, Race race, SystemUser user) {
+    public Vote(Game game, Race race) {
         this.game = game;
-        this.systemUser = user;
         this.race = race;
     }
 
@@ -57,14 +51,6 @@ public class Vote {
 
     public void setGame(Game game) {
         this.game = game;
-    }
-
-    public SystemUser getSystemUser() {
-        return systemUser;
-    }
-
-    public void setSystemUser(SystemUser systemUser) {
-        this.systemUser = systemUser;
     }
 
     public Race getRace() {

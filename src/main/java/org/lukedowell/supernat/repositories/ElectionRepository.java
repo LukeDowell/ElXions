@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+
 /**
  * Created by ldowell on 11/20/15.
  */
@@ -13,5 +15,5 @@ public interface ElectionRepository extends CrudRepository<Election, Long> {
 
 
     @Query("SELECT e FROM Election e WHERE CURRENT_TIME between e.startDate and e.endDate")
-    Election getRunningElections();
+    Collection<Election> getRunningElections();
 }

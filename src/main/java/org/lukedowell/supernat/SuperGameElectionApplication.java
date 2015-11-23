@@ -23,8 +23,6 @@ public class SuperGameElectionApplication implements CommandLineRunner{
     @Autowired
     RaceRepository raceRepository;
 
-    @Autowired
-    SystemUserRepository systemUserRepository;
 
     @Autowired
     VoteRepository voteRepository;
@@ -44,15 +42,12 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         Game funGame = new Game("Fun Game");
         Game boringGame = new Game("Boring Game");
 
-        SystemUser user = new SystemUser("user", "pass");
-        SystemUser admin = new SystemUser("admin", "pass");
-
         actionRace.setCandidates(Collections.singletonList(funGame));
         strategyRace.setCandidates(Collections.singletonList(boringGame));
 
-        Vote vote1 = new Vote(funGame, actionRace, user);
-        Vote vote2 = new Vote(funGame, actionRace, admin);
-        Vote vote3 = new Vote(boringGame, strategyRace, user);
+        Vote vote1 = new Vote(funGame, actionRace);
+        Vote vote2 = new Vote(funGame, actionRace);
+        Vote vote3 = new Vote(boringGame, strategyRace);
 
         funGame = gameRepository.save(funGame);
         boringGame = gameRepository.save(boringGame);
@@ -62,9 +57,6 @@ public class SuperGameElectionApplication implements CommandLineRunner{
 
         actionRace = raceRepository.save(actionRace);
         strategyRace = raceRepository.save(strategyRace);
-
-        user = systemUserRepository.save(user);
-        admin = systemUserRepository.save(admin);
 
         vote1 = voteRepository.save(vote1);
         vote2 = voteRepository.save(vote2);
