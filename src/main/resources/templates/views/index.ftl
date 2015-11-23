@@ -1,4 +1,4 @@
-<#import "spring.ftl" as spring />
+<#import "../util/spring.ftl" as spring />
 
 <#macro page>
 <html>
@@ -14,10 +14,17 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/">Login</a></li>
                     <li><a href="/home">Home</a></li>
+                    <li><a href="/vote">Vote</a></li>
                 </ul>
+
             </div>
         </div>
     </nav>
+
+    <h2>Data model: </h2>
+        <#list .data_model?keys as key>
+        ${key}
+        </#list>
 
     <#nested>
 

@@ -2,6 +2,7 @@ package org.lukedowell.supernat.services.interfaces;
 
 import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.entities.Race;
+import org.lukedowell.supernat.entities.SystemUser;
 import org.lukedowell.supernat.entities.Vote;
 import org.springframework.security.access.annotation.Secured;
 
@@ -11,7 +12,7 @@ import org.springframework.security.access.annotation.Secured;
 @Secured("ROLE_VOTER")
 public interface IVoteService {
 
-    Vote vote(long gameId, long raceId);
+    Vote vote(long gameId, long raceId, SystemUser user);
 
-    Vote vote(Game game, Race race);
+    Vote vote(Game game, Race race, SystemUser user);
 }

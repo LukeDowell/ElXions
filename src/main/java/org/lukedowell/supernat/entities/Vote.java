@@ -18,7 +18,7 @@ public class Vote {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private long id;
+    private long voteId;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "gameId")
@@ -37,12 +37,12 @@ public class Vote {
         this.race = race;
     }
 
-    public long getId() {
-        return id;
+    public long getVoteId() {
+        return voteId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setVoteId(long voteId) {
+        this.voteId = voteId;
     }
 
     public Game getGame() {

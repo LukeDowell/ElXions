@@ -14,7 +14,6 @@ import java.util.Collection;
 public class Race {
 
     @Id
-    @Column(name = "RACE_ID", nullable = false)
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private long raceId;
@@ -29,13 +28,20 @@ public class Race {
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Game.class)
     @JoinTable(name = "RACE_CANDIDATES",
             joinColumns=
-            @JoinColumn(name="RACE_ID", referencedColumnName = "RACE_ID"),
+            @JoinColumn(name="raceId", referencedColumnName = "raceId"),
             inverseJoinColumns =
-            @JoinColumn(name="GAME_ID", referencedColumnName = "GAME_ID"))
+            @JoinColumn(name="gameId", referencedColumnName = "gameId"))
     private Collection candidates;
 
     @OneToMany(targetEntity = Vote.class, mappedBy = "race")
     private Collection votes;
+
+    @ManyToMany(targetEntity = SystemUser.class, fetch = FetchType.EAGER)
+    @JoinTable(joinColumns =
+                @JoinColumn(name="raceId", referencedColumnName = "raceId"),
+                inverseJoinColumns =
+                @JoinColumn(name="userId", referencedColumnName = "userId"))
+    private Collection participants;
 
     public Race() {}
 
@@ -44,9 +50,14 @@ public class Race {
         this.election = election;
     }
 
+    @Override
+    public String toString() {
+        return title + " race. Number of entrants: " + (candidates != null ? candidates.size() : 0);
+    }
+
     @JsonProperty(value = "electionId")
     public long getElectionId() {
-        return election.getId();
+        return election.getElectionId();
     }
 
     public long getId() {
@@ -87,5 +98,13 @@ public class Race {
 
     public void setVotes(Collection<Vote> votes) {
         this.votes = votes;
+    }
+
+    public Collection getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Collection participants) {
+        this.participants = participants;
     }
 }

@@ -22,7 +22,7 @@ public class Election {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    private long id;
+    private long electionId;
 
     @OneToMany(mappedBy = "election", targetEntity = Race.class)
     private Collection races;
@@ -56,12 +56,12 @@ public class Election {
         this.endDate = endDate;
     }
 
-    public long getId() {
-        return id;
+    public long getElectionId() {
+        return electionId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setElectionId(long electionId) {
+        this.electionId = electionId;
     }
 
     public Collection<Race> getRaces() {

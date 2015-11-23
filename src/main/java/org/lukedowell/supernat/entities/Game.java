@@ -17,7 +17,6 @@ import java.util.Collection;
 public class Game {
 
     @Id
-    @Column(name = "GAME_ID", nullable = false)
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private long gameId;
@@ -34,6 +33,11 @@ public class Game {
 
     public Game(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "Game: " + title;
     }
 
     public long getId() {

@@ -1,6 +1,7 @@
 package org.lukedowell.supernat.services.interfaces;
 
 import org.lukedowell.supernat.entities.Race;
+import org.lukedowell.supernat.entities.SystemUser;
 import org.springframework.security.access.annotation.Secured;
 
 import java.util.Collection;
@@ -19,4 +20,10 @@ public interface IRaceService {
 
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
     Collection<Race> getAllRaces();
+
+    @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
+    boolean hasUserVoted(Race race, SystemUser user);
+
+    @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
+    boolean hasUserVoted(long race_id, long user_id);
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.core.authority.AuthorityUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,9 +24,8 @@ public class SuperGameElectionApplication implements CommandLineRunner{
     @Autowired
     RaceRepository raceRepository;
 
-
     @Autowired
-    VoteRepository voteRepository;
+    SystemUserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SuperGameElectionApplication.class, args);
@@ -42,12 +42,16 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         Game funGame = new Game("Fun Game");
         Game boringGame = new Game("Boring Game");
 
-        actionRace.setCandidates(Collections.singletonList(funGame));
+        actionRace.setCandidates(Arrays.asList(funGame, boringGame));
         strategyRace.setCandidates(Collections.singletonList(boringGame));
 
-        Vote vote1 = new Vote(funGame, actionRace);
-        Vote vote2 = new Vote(funGame, actionRace);
-        Vote vote3 = new Vote(boringGame, strategyRace);
+        SystemUser normalUser = new SystemUser("user", "pass", AuthorityUtils.createAuthorityList("VOTER"));
+        SystemUser admin = new SystemUser("admin", "pass", AuthorityUtils.createAuthorityList("ADMIN"));
+        SystemUser dev = new SystemUser("dev", "pass", AuthorityUtils.createAuthorityList("VOTER", "ADMIN"));
+
+        userRepository.save(normalUser);
+        userRepository.save(admin);
+        userRepository.save(dev);
 
         funGame = gameRepository.save(funGame);
         boringGame = gameRepository.save(boringGame);
@@ -58,8 +62,5 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         actionRace = raceRepository.save(actionRace);
         strategyRace = raceRepository.save(strategyRace);
 
-        vote1 = voteRepository.save(vote1);
-        vote2 = voteRepository.save(vote2);
-        vote3 = voteRepository.save(vote3);
     }
 }

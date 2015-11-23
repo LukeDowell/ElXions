@@ -1,6 +1,7 @@
 package org.lukedowell.supernat.controller;
 
 import org.lukedowell.supernat.domain.Response;
+import org.lukedowell.supernat.entities.SystemUser;
 import org.lukedowell.supernat.entities.Vote;
 import org.lukedowell.supernat.services.VoteService;
 import org.lukedowell.supernat.services.interfaces.IVoteService;
@@ -27,7 +28,7 @@ public class VoteController {
     @RequestMapping(method = RequestMethod.POST, value="/{raceId}/{gameId}")
     public Response<Vote> vote(@PathVariable("raceId") long raceId,
                                @PathVariable("gameId") long gameId,
-                               Principal principal) {
-        return new Response<>(voteService.vote(raceId, gameId));
+                               SystemUser user) {
+        return new Response<>(voteService.vote(raceId, gameId, user));
     }
 }

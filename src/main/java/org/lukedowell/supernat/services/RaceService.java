@@ -2,8 +2,10 @@ package org.lukedowell.supernat.services;
 
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Race;
+import org.lukedowell.supernat.entities.SystemUser;
 import org.lukedowell.supernat.repositories.ElectionRepository;
 import org.lukedowell.supernat.repositories.RaceRepository;
+import org.lukedowell.supernat.repositories.SystemUserRepository;
 import org.lukedowell.supernat.services.interfaces.IElectionService;
 import org.lukedowell.supernat.services.interfaces.IRaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class RaceService implements IRaceService {
     ElectionRepository electionRepository;
 
     @Autowired
+    SystemUserRepository userRepository;
+
+    @Autowired
     IElectionService electionService;
 
     @Override
@@ -46,5 +51,18 @@ public class RaceService implements IRaceService {
             races.add(r);
         }
         return races;
+    }
+
+    @Override
+    public boolean hasUserVoted(Race race, SystemUser user) {
+        return race.getParticipants().contains(user);
+    }
+
+    @Override
+    public boolean hasUserVoted(long race_id, long user_id) {
+        return hasUserVoted(
+                raceRepository.findOne(race_id),
+                userRepository.findOne(user_id)
+        );
     }
 }

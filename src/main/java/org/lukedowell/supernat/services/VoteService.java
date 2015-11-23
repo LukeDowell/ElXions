@@ -2,6 +2,7 @@ package org.lukedowell.supernat.services;
 
 import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.entities.Race;
+import org.lukedowell.supernat.entities.SystemUser;
 import org.lukedowell.supernat.entities.Vote;
 import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.repositories.RaceRepository;
@@ -26,14 +27,14 @@ public class VoteService implements IVoteService {
     GameRepository gameRepository;
 
     @Override
-    public Vote vote(long game_id, long race_id) {
+    public Vote vote(long game_id, long race_id, SystemUser user) {
         Game game = gameRepository.findOne(game_id);
         Race race = raceRepository.findOne(race_id);
-        return vote(game, race);
+        return vote(game, race, user);
     }
 
     @Override
-    public Vote vote(Game game, Race race) {
+    public Vote vote(Game game, Race race, SystemUser user) {
         Vote vote = new Vote(game, race);
         return voteRepository.save(vote);
     }
