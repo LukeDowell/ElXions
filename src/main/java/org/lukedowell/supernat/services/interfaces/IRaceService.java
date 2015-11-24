@@ -1,7 +1,6 @@
 package org.lukedowell.supernat.services.interfaces;
 
 import org.lukedowell.supernat.entities.Race;
-import org.lukedowell.supernat.entities.SystemUser;
 import org.springframework.security.access.annotation.Secured;
 
 import java.util.Collection;

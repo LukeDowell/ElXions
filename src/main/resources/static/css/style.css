@@ -9,3 +9,6 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+/* Fix for angularui - bootstrap. Removes empty href values. */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

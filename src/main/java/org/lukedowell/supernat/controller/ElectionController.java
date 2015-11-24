@@ -19,7 +19,7 @@ public class ElectionController {
     IElectionService electionService;
 
     @RequestMapping(method = RequestMethod.POST, value="/{title}")
-    public Response<Election> createElection(@RequestBody(required = false) Election election, @PathVariable String title) {
+    public Response<Election> createElection(@RequestBody(required = false) Election election, @PathVariable("title") String title) {
         Response<Election> response;
         if(election != null) {
 

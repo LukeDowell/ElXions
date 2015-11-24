@@ -2,7 +2,6 @@ package org.lukedowell.supernat.services;
 
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Race;
-import org.lukedowell.supernat.entities.SystemUser;
 import org.lukedowell.supernat.repositories.ElectionRepository;
 import org.lukedowell.supernat.repositories.RaceRepository;
 import org.lukedowell.supernat.repositories.SystemUserRepository;

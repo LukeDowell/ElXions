@@ -37,6 +37,7 @@
 
     <!-- BEGIN SCRIPTS -->
     <script src="vendors/angular/angular.js"></script>
+    <script src="vendors/angular-ui-bootstrap/ui-bootstrap.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers/HomeController.js"></script>
     <script src="js/controllers/GamesController.js"></script>

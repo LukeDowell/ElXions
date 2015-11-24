@@ -1,12 +1,17 @@
 package org.lukedowell.supernat;
 
-import org.lukedowell.supernat.entities.*;
-import org.lukedowell.supernat.repositories.*;
+import org.lukedowell.supernat.entities.Election;
+import org.lukedowell.supernat.entities.Game;
+import org.lukedowell.supernat.entities.Race;
+import org.lukedowell.supernat.entities.SystemUser;
+import org.lukedowell.supernat.repositories.ElectionRepository;
+import org.lukedowell.supernat.repositories.GameRepository;
+import org.lukedowell.supernat.repositories.RaceRepository;
+import org.lukedowell.supernat.repositories.SystemUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.core.authority.AuthorityUtils;
 
 import java.util.Arrays;
 import java.util.Collections;

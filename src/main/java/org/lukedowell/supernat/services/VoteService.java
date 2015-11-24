@@ -1,6 +1,8 @@
 package org.lukedowell.supernat.services;
 
-import org.lukedowell.supernat.entities.*;
+import org.lukedowell.supernat.entities.Game;
+import org.lukedowell.supernat.entities.Race;
+import org.lukedowell.supernat.entities.Vote;
 import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.repositories.RaceRepository;
 import org.lukedowell.supernat.repositories.VoteRepository;

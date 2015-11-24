@@ -2,13 +2,10 @@ package org.lukedowell.supernat.controller;
 
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Race;
-import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.services.interfaces.IElectionService;
 import org.lukedowell.supernat.services.interfaces.IGameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * Created by ldowell on 11/19/15.
