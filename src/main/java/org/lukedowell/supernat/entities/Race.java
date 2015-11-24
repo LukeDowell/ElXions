@@ -31,9 +31,17 @@ public class Race {
             @JoinColumn(name="raceId", referencedColumnName = "raceId"),
             inverseJoinColumns =
             @JoinColumn(name="gameId", referencedColumnName = "gameId"))
-    private Collection candidates;
+    private Collection<Game> candidates;
 
-    @OneToMany(targetEntity = Vote.class, mappedBy = "race")
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = SystemUser.class)
+    @JoinTable(name = "RACE_PARTICIPANTS",
+            joinColumns =
+            @JoinColumn(name = "raceId", referencedColumnName = "raceId"),
+            inverseJoinColumns =
+            @JoinColumn(name = "userId", referencedColumnName = "userId"))
+    private Collection<SystemUser> participants;
+
+    @OneToMany(targetEntity = Vote.class, mappedBy = "race", fetch = FetchType.EAGER)
     private Collection votes;
 
     public Race() {}
@@ -91,5 +99,13 @@ public class Race {
 
     public void setVotes(Collection<Vote> votes) {
         this.votes = votes;
+    }
+
+    public Collection getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Collection participants) {
+        this.participants = participants;
     }
 }

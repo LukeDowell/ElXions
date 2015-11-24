@@ -21,7 +21,7 @@ public class Game {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long gameId;
 
-    @OneToMany(mappedBy = "game", targetEntity = Vote.class)
+    @OneToMany(mappedBy = "game", targetEntity = Vote.class, fetch = FetchType.EAGER)
     private Collection votes;
 
     @ManyToMany(mappedBy = "candidates", targetEntity = Race.class, fetch = FetchType.EAGER)

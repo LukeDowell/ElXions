@@ -11,9 +11,9 @@
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
-            <input type="hidden"
-                   name="${_csrf.parameterName}"
-                   value="${_csrf.token}"/>
+            <#--<input type="hidden"-->
+                   <#--name="${_csrf.parameterName}"-->
+                   <#--value="${_csrf.token}"/>-->
             <button type="submit" value="class="btn btn-default">Login</button>
         </form>
     </section>

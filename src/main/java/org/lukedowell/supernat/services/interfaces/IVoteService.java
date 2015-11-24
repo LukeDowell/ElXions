@@ -9,10 +9,14 @@ import org.springframework.security.access.annotation.Secured;
 /**
  * Created by ldowell on 11/23/15.
  */
-@Secured("ROLE_VOTER")
 public interface IVoteService {
 
-    Vote vote(long gameId, long raceId, SystemUser user);
+    @Secured("ROLE_VOTER")
+    Vote vote(long gameId, long raceId);
 
-    Vote vote(Game game, Race race, SystemUser user);
+    @Secured("ROLE_VOTER")
+    Vote vote(Game game, Race race);
+
+    @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
+    Long getNumVotes(long gameId, long raceId);
 }

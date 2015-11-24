@@ -1,7 +1,5 @@
 package org.lukedowell.supernat.entities;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,8 +16,8 @@ public class SystemUser {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long userId;
 
-    @ManyToMany(mappedBy = "participants", targetEntity = Election.class, fetch = FetchType.EAGER)
-    private Collection<Election> elections; //A list of all the elections this user has participated in
+    @ManyToMany(mappedBy = "participants", targetEntity = Race.class, fetch = FetchType.EAGER)
+    private Collection<Race> races; //A list of all the elections this user has already participated in
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Collection<String> roles;
@@ -44,12 +42,12 @@ public class SystemUser {
         this.userId = userId;
     }
 
-    public Collection<Election> getElections() {
-        return elections;
+    public Collection<Race> getElections() {
+        return races;
     }
 
-    public void setElections(Collection<Election> elections) {
-        this.elections = elections;
+    public void setElections(Collection<Race> elections) {
+        this.races = elections;
     }
 
     public String getUsername() {

@@ -36,9 +36,7 @@ public class WebController {
     @RequestMapping("/home")
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
     public String home(Model model, Principal principal) {
-
         model.addAttribute("User", principal);
-
         return "home";
     }
 

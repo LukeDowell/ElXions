@@ -24,14 +24,6 @@ public class Election {
     @OneToMany(mappedBy = "election", targetEntity = Race.class)
     private Collection races;
 
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = SystemUser.class)
-    @JoinTable(name = "ELECTION_PARTICIPANTS",
-                joinColumns =
-                @JoinColumn(name = "electionId", referencedColumnName = "electionId"),
-                inverseJoinColumns =
-                @JoinColumn(name = "userId", referencedColumnName = "userId"))
-    private Collection participants;
-
     private String title;
 
     private Date startDate;
@@ -54,6 +46,8 @@ public class Election {
         this.startDate = new Date();
         this.endDate = endOfMonth;
     }
+
+
 
     public Election(String title, Date startDate, Date endDate) {
         this.title = title;
