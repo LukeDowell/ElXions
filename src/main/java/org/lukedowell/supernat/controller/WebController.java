@@ -1,5 +1,7 @@
 package org.lukedowell.supernat.controller;
 
+import org.lukedowell.supernat.entities.Election;
+import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.services.interfaces.IElectionService;
 import org.lukedowell.supernat.services.interfaces.IGameService;
@@ -12,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -51,7 +55,16 @@ public class WebController {
     @RequestMapping("/admin")
     @Secured({"ROLE_ADMIN"})
     public String admin(Model model, Principal principal) {
+
+        Collection<Election> runningElections = electionService.getRunningElections();
+        Collection<Race> currentRaces = new ArrayList<>();
+
+        //For each running election, add all of their races to the current races collection
+        runningElections.forEach((election -> election.getRaces().forEach((currentRaces::add))));
+
         model.addAttribute("user", principal);
+        model.addAttribute("currentElections", runningElections);
+        model.addAttribute("currentRaces", currentRaces);
         return "admin";
     }
 
