@@ -1,6 +1,8 @@
 package org.lukedowell.supernat.controller;
 
+import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.services.interfaces.IElectionService;
+import org.lukedowell.supernat.services.interfaces.IGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
@@ -21,6 +23,9 @@ public class WebController {
     @Autowired
     IElectionService electionService;
 
+    @Autowired
+    IGameService gameService;
+
     @RequestMapping("/vote")
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
     public String vote(Model model) {
@@ -28,20 +33,35 @@ public class WebController {
         return "vote";
     }
 
-    @RequestMapping("/login")
-    public String login(Map<String, Object> model) {
-        return "login";
-    }
-
     @RequestMapping("/home")
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
     public String home(Model model, Principal principal) {
-        model.addAttribute("User", principal);
+        model.addAttribute("user", principal);
         return "home";
     }
 
+    @RequestMapping("/games")
+    @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
+    public String games(Model model, Principal principal) {
+        model.addAttribute("user", principal);
+        model.addAttribute("gameList", gameService.getAllGames());
+        return "games";
+    }
+
+    @RequestMapping("/admin")
+    @Secured({"ROLE_ADMIN"})
+    public String admin(Model model, Principal principal) {
+        model.addAttribute("user", principal);
+        return "admin";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @RequestMapping("/")
-    public String index(Map<String, Object> model) {
+    public String index() {
         return "login";
     }
 }

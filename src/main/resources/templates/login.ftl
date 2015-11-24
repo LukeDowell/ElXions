@@ -1,6 +1,6 @@
-<#import "views/index.ftl" as home>
+<#import "util/index.ftl" as index>
 
-<@home.page>
+<@index.page>
     <section class="container">
         <form class="col-md-6 col-md-offset-3" method="POST" action="/login">
             <div class="form-group">
@@ -17,4 +17,4 @@
             <button type="submit" value="class="btn btn-default">Login</button>
         </form>
     </section>
-</@home.page>
+</@index.page>

@@ -1,6 +1,6 @@
-<#import "views/index.ftl" as home>
+<#import "util/index.ftl" as index>
 
-<@home.page>
+<@index.page>
 <section class="container" ng-controller="VoteController">
     <div class="jumbotron">
         <#list electionList>
@@ -29,4 +29,4 @@
         </#list>
     </div>
 </section>
-</@home.page>
+</@index.page>

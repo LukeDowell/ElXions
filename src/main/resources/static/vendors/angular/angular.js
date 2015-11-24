@@ -7071,12 +7071,12 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
       var controller = directive.controller;
       var controllerAs = directive.controllerAs;
       if (!controller) {
-        // There is no controller, there may or may not be a controllerAs property
+        // There is no controllers, there may or may not be a controllerAs property
         throw $compileMinErr('noctrl',
               "Cannot bind to controller without directive '{0}'s controller.",
               directiveName);
       } else if (!identifierForController(controller, controllerAs)) {
-        // There is a controller, but no identifier or controllerAs property
+        // There is a controllers, but no identifier or controllerAs property
         throw $compileMinErr('noident',
               "Cannot bind to controller without identifier for directive '{0}'.",
               directiveName);
@@ -8182,7 +8182,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
           //If only parents then start at the parent element
           if (inheritType === '^^') {
             $element = $element.parent();
-          //Otherwise attempt getting the controller from elementControllers in case
+          //Otherwise attempt getting the controllers from elementControllers in case
           //the element is transcluded (and has no data) and to avoid .data if possible
           } else {
             value = elementControllers && elementControllers[name];
@@ -8298,7 +8298,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
           var controllerResult = controller();
           if (controllerResult !== controller.instance) {
-            // If the controller constructor has a return value, overwrite the instance
+            // If the controllers constructor has a return value, overwrite the instance
             // from setupControllers
             controller.instance = controllerResult;
             $element.data('$' + controllerDirective.name + 'Controller', controllerResult);
@@ -8845,7 +8845,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
     }
 
 
-    // Set up $watches for isolate scope and controller bindings. This process
+    // Set up $watches for isolate scope and controllers bindings. This process
     // only occurs for isolate scopes and new scopes with controllerAs.
     function initializeDirectiveBindings(scope, attrs, destination, bindings, directive) {
       var removeWatchCollection = [];
@@ -9091,7 +9091,7 @@ function $ControllerProvider() {
   /**
    * @ngdoc method
    * @name $controllerProvider#allowGlobals
-   * @description If called, allows `$controller` to find controller constructors on `window`
+   * @description If called, allows `$controllers` to find controllers constructors on `window`
    */
   this.allowGlobals = function() {
     globals = true;
@@ -9129,11 +9129,11 @@ function $ControllerProvider() {
      */
     return function(expression, locals, later, ident) {
       // PRIVATE API:
-      //   param `later` --- indicates that the controller's constructor is invoked at a later time.
-      //                     If true, $controller will allocate the object with the correct
-      //                     prototype chain, but will not invoke the controller until a returned
+      //   param `later` --- indicates that the controllers's constructor is invoked at a later time.
+      //                     If true, $controllers will allocate the object with the correct
+      //                     prototype chain, but will not invoke the controllers until a returned
       //                     callback is invoked.
-      //   param `ident` --- An optional label which overrides the label parsed from the controller
+      //   param `ident` --- An optional label which overrides the label parsed from the controllers
       //                     expression, if any.
       var instance, match, constructor, identifier;
       later = later === true;
@@ -9159,11 +9159,11 @@ function $ControllerProvider() {
       }
 
       if (later) {
-        // Instantiate controller later:
+        // Instantiate controllers later:
         // This machinery is used to create an instance of the object before calling the
-        // controller's constructor itself.
+        // controllers's constructor itself.
         //
-        // This allows properties to be added to the controller before the constructor is
+        // This allows properties to be added to the controllers before the constructor is
         // invoked. Primarily, this is used for isolate scope bindings in $compile.
         //
         // This feature is not intended for use by applications, and is thus not documented
@@ -20120,7 +20120,7 @@ function nullFormRenameControl(control, name) {
  * of `FormController`.
  *
  */
-//asks for $scope to fool the BC controller module
+//asks for $scope to fool the BC controllers module
 FormController.$inject = ['$element', '$attrs', '$scope', '$animate', '$interpolate'];
 function FormController(element, attrs, $scope, $animate, $interpolate) {
   var form = this,
@@ -25417,7 +25417,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * out of sync. It's also important to note that `$setViewValue` does not call `$render` or change
    * the control's DOM value in any way. If we want to change the control's DOM value
    * programmatically, we should update the `ngModel` scope expression. Its new value will be
-   * picked up by the model controller, which will run it through the `$formatters`, `$render` it
+   * picked up by the model controllers, which will run it through the `$formatters`, `$render` it
    * to update the DOM, and finally call `$validate` on it.
    * </div>
    *
@@ -26515,7 +26515,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
         unknownOption.remove();
       };
 
-      // Update the controller methods for multiple selectable options
+      // Update the controllers methods for multiple selectable options
       if (!multiple) {
 
         selectCtrl.writeValue = function writeNgOptionsValue(value) {
@@ -28110,7 +28110,7 @@ var ngSwitchDirective = ['$animate', function($animate) {
   return {
     require: 'ngSwitch',
 
-    // asks for $scope to fool the BC controller module
+    // asks for $scope to fool the BC controllers module
     controller: ['$scope', function ngSwitchController() {
      this.cases = {};
     }],
@@ -28317,7 +28317,7 @@ function chromeHack(optionElement) {
  * @ngdoc type
  * @name  select.SelectController
  * @description
- * The controller for the `<select>` directive. This provides support for reading
+ * The controllers for the `<select>` directive. This provides support for reading
  * and writing the selected value(s) of the control and also coordinates dynamically
  * added `<option>` elements, perhaps by an `ngRepeat` directive.
  */
@@ -28737,7 +28737,7 @@ var selectDirective = function() {
 
 // The option directive is purely designed to communicate the existence (or lack of)
 // of dynamically created (and destroyed) option elements to their containing select
-// directive via its controller.
+// directive via its controllers.
 var optionDirective = ['$interpolate', function($interpolate) {
   return {
     restrict: 'E',

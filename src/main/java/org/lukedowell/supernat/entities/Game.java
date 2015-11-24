@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  *
@@ -29,10 +30,13 @@ public class Game {
 
     private String title;
 
+    private Date created; //The date the game was added to the library
+
     public Game() {}
 
     public Game(String title) {
         this.title = title;
+        this.created = new Date();
     }
 
     @Override
