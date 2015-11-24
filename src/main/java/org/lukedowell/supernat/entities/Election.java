@@ -2,10 +2,7 @@ package org.lukedowell.supernat.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -26,6 +23,14 @@ public class Election {
 
     @OneToMany(mappedBy = "election", targetEntity = Race.class)
     private Collection races;
+
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = SystemUser.class)
+    @JoinTable(name = "ELECTION_PARTICIPANTS",
+                joinColumns =
+                @JoinColumn(name = "electionId", referencedColumnName = "electionId"),
+                inverseJoinColumns =
+                @JoinColumn(name = "userId", referencedColumnName = "userId"))
+    private Collection participants;
 
     private String title;
 

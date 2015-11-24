@@ -1,12 +1,8 @@
 package org.lukedowell.supernat.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.javafx.font.freetype.FTFactory;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -15,21 +11,69 @@ import java.util.Collection;
  * Created by ldowell on 11/23/15.
  */
 @Entity
-public class SystemUser extends User implements UserDetails {
+public class SystemUser {
 
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private long userId;
 
-    @ManyToMany(mappedBy = "participants", targetEntity = Race.class, fetch = FetchType.EAGER)
-    private Collection races;
+    @ManyToMany(mappedBy = "participants", targetEntity = Election.class, fetch = FetchType.EAGER)
+    private Collection<Election> elections; //A list of all the elections this user has participated in
 
-    public SystemUser(String username, String password) {
-        this(username, password, AuthorityUtils.createAuthorityList("VOTER"));
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    private Collection<String> roles;
+
+    private String username;
+
+    private String password;
+
+    public SystemUser() {}
+
+    public SystemUser(String username, String password, Collection roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
     }
 
-    public SystemUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, authorities);
+    public long getUserId() {
+        return userId;
     }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public Collection<Election> getElections() {
+        return elections;
+    }
+
+    public void setElections(Collection<Election> elections) {
+        this.elections = elections;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Collection<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<String> roles) {
+        this.roles = roles;
+    }
+
 }

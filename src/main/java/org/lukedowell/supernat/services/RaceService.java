@@ -52,17 +52,4 @@ public class RaceService implements IRaceService {
         }
         return races;
     }
-
-    @Override
-    public boolean hasUserVoted(Race race, SystemUser user) {
-        return race.getParticipants().contains(user);
-    }
-
-    @Override
-    public boolean hasUserVoted(long race_id, long user_id) {
-        return hasUserVoted(
-                raceRepository.findOne(race_id),
-                userRepository.findOne(user_id)
-        );
-    }
 }

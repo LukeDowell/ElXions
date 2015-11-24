@@ -20,10 +20,4 @@ public interface IRaceService {
 
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
     Collection<Race> getAllRaces();
-
-    @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
-    boolean hasUserVoted(Race race, SystemUser user);
-
-    @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
-    boolean hasUserVoted(long race_id, long user_id);
 }
