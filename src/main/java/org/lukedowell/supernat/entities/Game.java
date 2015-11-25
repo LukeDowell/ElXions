@@ -23,10 +23,10 @@ public class Game {
     private long gameId;
 
     @OneToMany(mappedBy = "game", targetEntity = Vote.class, fetch = FetchType.EAGER)
-    private Collection votes;
+    private Collection<Vote> votes;
 
     @ManyToMany(mappedBy = "candidates", targetEntity = Race.class, fetch = FetchType.EAGER)
-    private Collection races;
+    private Collection<Race> races;
 
     private String title;
 

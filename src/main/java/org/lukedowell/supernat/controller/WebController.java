@@ -1,7 +1,9 @@
 package org.lukedowell.supernat.controller;
 
+import org.lukedowell.supernat.domain.ElectionView;
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Race;
+import org.lukedowell.supernat.services.ViewModelService;
 import org.lukedowell.supernat.services.interfaces.IElectionService;
 import org.lukedowell.supernat.services.interfaces.IGameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by ldowell on 11/19/15.
  */
 @Controller
 public class WebController {
+
+    @Autowired
+    ViewModelService viewModelService;
 
     @Autowired
     IElectionService electionService;
@@ -29,7 +35,13 @@ public class WebController {
     @RequestMapping("/vote")
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
     public String vote(Model model) {
-        model.addAttribute(electionService.getRunningElections());
+        List<ElectionView> electionViews = new ArrayList<>();
+
+        //Build a view for each running election and add it to our list
+        electionService.getRunningElections().forEach((election -> electionViews.add(viewModelService.buildElectionView(election))));
+
+        model.addAttribute("elections", electionViews);
+
         return "vote";
     }
 

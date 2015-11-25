@@ -1,12 +1,10 @@
 package org.lukedowell.supernat.controller;
 
 import org.lukedowell.supernat.domain.Response;
-import org.lukedowell.supernat.entities.Game;
-import org.lukedowell.supernat.entities.Race;
-import org.lukedowell.supernat.entities.SystemUser;
-import org.lukedowell.supernat.entities.Vote;
+import org.lukedowell.supernat.entities.*;
 import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.repositories.RaceRepository;
+import org.lukedowell.supernat.repositories.RecordRepository;
 import org.lukedowell.supernat.repositories.SystemUserRepository;
 import org.lukedowell.supernat.services.interfaces.IVoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,26 +34,38 @@ public class VoteController {
     @Autowired
     SystemUserRepository systemUserRepository;
 
+    @Autowired
+    RecordRepository recordRepository;
+
 
     @RequestMapping(method = RequestMethod.POST, value="/{raceId}/{gameId}")
     public Response<Vote> vote(@PathVariable("raceId") long raceId,
                                @PathVariable("gameId") long gameId,
                                Principal principal) {
 
-        //Grab the user
+        //Grab the user and race
         SystemUser user = systemUserRepository.findByUsername(principal.getName());
-
-        //Grab the game and race
-        Game game = gameRepository.findOne(gameId);
         Race race = raceRepository.findOne(raceId);
 
         //Allow the vote only if the user hasn't voted in the race already
-        if(!race.getParticipants().contains(user)) {
-            race.getParticipants().add(user);
-            raceRepository.save(race);
-            return new Response<>(voteService.vote(game, race));
+        if(recordRepository.findRecord(raceId, user.getUserId()) == null) {
+
+            //Attempt to submit the vote
+            Vote userVote = voteService.vote(raceId, gameId);
+
+            //If it was successful
+            if(userVote != null) {
+                //Save the participation record
+                ParticipationRecord record = new ParticipationRecord(race, user);
+                recordRepository.save(record);
+                //Return the envelope
+                return new Response<>(userVote);
+            } else {
+                return new Response<>(Response.FAILED, "Voting service is broken. :( ", null);
+            }
+
         } else {
-            return new Response<>(Response.FAILED, "You cannot vote in the same race twice!", null);
+            return new Response<>(Response.FAILED, "You have already voted in this race!", null);
         }
     }
 

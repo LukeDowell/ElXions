@@ -58,14 +58,12 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         userRepository.save(admin);
         userRepository.save(dev);
 
-        funGame = gameRepository.save(funGame);
-        boringGame = gameRepository.save(boringGame);
+        gameRepository.save(funGame);
+        gameRepository.save(boringGame);
 
+        electionRepository.save(election);
 
-        election = electionRepository.save(election);
-
-        actionRace = raceRepository.save(actionRace);
-        strategyRace = raceRepository.save(strategyRace);
-
+        raceRepository.save(actionRace);
+        raceRepository.save(strategyRace);
     }
 }

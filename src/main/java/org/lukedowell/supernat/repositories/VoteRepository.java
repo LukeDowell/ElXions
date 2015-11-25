@@ -17,4 +17,5 @@ public interface VoteRepository extends CrudRepository<Vote, Long> {
     @Query("SELECT COUNT(v) FROM Vote v WHERE v.game = :gameId AND v.race = :raceId")
     Long countVotes( @Param("gameId") Game game, @Param("raceId") Race race);
 
+
 }

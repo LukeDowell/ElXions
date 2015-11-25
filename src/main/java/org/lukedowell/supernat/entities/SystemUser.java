@@ -16,11 +16,11 @@ public class SystemUser {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long userId;
 
-    @ManyToMany(mappedBy = "participants", targetEntity = Race.class, fetch = FetchType.EAGER)
-    private Collection<Race> races; //A list of all the elections this user has already participated in
-
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     private Collection<String> roles;
+
+    @OneToMany(mappedBy = "user", targetEntity = ParticipationRecord.class)
+    private Collection<ParticipationRecord> records;
 
     private String username;
 
@@ -40,14 +40,6 @@ public class SystemUser {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public Collection<Race> getElections() {
-        return races;
-    }
-
-    public void setElections(Collection<Race> elections) {
-        this.races = elections;
     }
 
     public String getUsername() {

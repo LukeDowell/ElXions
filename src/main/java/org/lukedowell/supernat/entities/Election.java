@@ -25,7 +25,7 @@ public class Election {
     private long electionId;
 
     @OneToMany(mappedBy = "election", targetEntity = Race.class)
-    private Collection races;
+    private Collection<Race> races;
 
     private String title;
 

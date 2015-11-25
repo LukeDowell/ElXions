@@ -60,13 +60,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             SystemUser user = systemUserRepository.findByUsername(username);
 
-            Collection<GrantedAuthority> authorities = new ArrayList<>();
-            user.getRoles().forEach((role) -> {
-                authorities.add(AuthorityUtils.createAuthorityList(role).get(0)); //TODO: gross
-            });
-
             if(user != null) {
+
+                Collection<GrantedAuthority> authorities = new ArrayList<>();
+                user.getRoles().forEach((role) -> {
+                    authorities.add(AuthorityUtils.createAuthorityList(role).get(0)); //TODO: gross
+                });
                 return new User(user.getUsername(), user.getPassword(), authorities);
+
             } else {
                 throw new UsernameNotFoundException("The user with username: " + username + " cannot be found.");
             }
