@@ -23,23 +23,27 @@ public class ViewModelService {
     @Autowired
     IVoteService voteService;
 
-    public ElectionView buildElectionView(Election e) {
+    public ElectionView buildElectionView(Election e, boolean recursive) {
         ElectionView electionView = new ElectionView();
 
         electionView.setTitle(e.getTitle());
         electionView.setId(e.getElectionId());
-        electionView.setRaces(buildRacesForElection(e));
+        if(recursive) {
+            electionView.setRaces(buildRacesForElection(e, recursive));
+        }
 
         return electionView;
     }
 
 
-    public RaceView buildRaceView(Race r) {
+    public RaceView buildRaceView(Race r, boolean includeGames) {
         RaceView raceView = new RaceView();
 
         raceView.setTitle(r.getTitle());
         raceView.setId(r.getId());
-        raceView.setGames(buildGamesForRace(r));
+        if(includeGames) {
+            raceView.setGames(buildGamesForRace(r));
+        }
 
         return raceView;
     }
@@ -49,10 +53,10 @@ public class ViewModelService {
         return new GameCard(game, numVotes);
     }
 
-    protected Collection<RaceView> buildRacesForElection(Election e) {
+    protected Collection<RaceView> buildRacesForElection(Election e, boolean recursive) {
         List<RaceView> races = new ArrayList<>();
 
-        e.getRaces().forEach((race) -> races.add(buildRaceView(race)));
+        e.getRaces().forEach((race) -> races.add(buildRaceView(race, recursive)));
 
         return races;
     }

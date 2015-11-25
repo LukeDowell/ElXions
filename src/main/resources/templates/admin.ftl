@@ -61,8 +61,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Parent Election:</label>
-                                <div class="btn-group" uib-dropdown>
-                                    <button type="button" class="btn btn-primary form-control" uib-dropdown-toggle>
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-primary form-control" data-toggle="dropdown">
                                         Choose Election
                                         <span class="caret"></span>
                                     </button>

@@ -1,4 +1,7 @@
 /**
- * Created by ldowell on 11/24/15.
+ * Created by ldowell on 11/25/15.
  */
-var app = angular.module('app', ['ui.bootstrap']);
+$(document).ready(function() {
+    console.log("jquery can suck it");
+
+});

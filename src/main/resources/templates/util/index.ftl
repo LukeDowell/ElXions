@@ -20,7 +20,6 @@
                     <li><a href="/vote">Vote</a></li>
                     <li><a href="/admin">Admin</a></li>
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -36,13 +35,9 @@
     <#nested>
 
     <!-- BEGIN SCRIPTS -->
-    <script src="vendors/angular/angular.js"></script>
-    <script src="vendors/angular-ui-bootstrap/ui-bootstrap.js"></script>
+    <script src="vendors/jquery/dist/jquery.js"></script>
+    <script src="vendors/bootstrap/bootstrap.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/controllers/HomeController.js"></script>
-    <script src="js/controllers/GamesController.js"></script>
-    <script src="js/controllers/VoteController.js"></script>
-    <script src="js/controllers/AdminController.js"></script>
     <!-- END SCRIPTS -->
 </body>
 </html>

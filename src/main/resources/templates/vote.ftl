@@ -17,7 +17,7 @@
                                 <#items as game>
                                     <div class="well col-md-1 col-md-offset-1 text-center gameCard">
                                         <div class="row">${game.title}</div>
-                                        <div class="row">${game.numVotes}</div>
+                                        <div class="row">Votes: ${game.numVotes}</div>
                                         <div class="row"><button type="button" class="btn btn-primary" ng-click="vote(${race.id}, ${game.id})">Vote</button></div>
                                     </div>
                                 </#items>
