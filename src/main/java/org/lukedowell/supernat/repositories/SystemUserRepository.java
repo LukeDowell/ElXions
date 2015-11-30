@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SystemUserRepository extends CrudRepository<SystemUser, Long> {
 
-    SystemUser findByUsername(String usename);
+    SystemUser findByUsername(String username);
 
 }

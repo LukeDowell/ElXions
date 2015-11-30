@@ -38,7 +38,7 @@ public class WebController {
         List<ElectionView> electionViews = new ArrayList<>();
 
         //Build a view for each running election and add it to our list
-        electionService.getRunningElections().forEach((election -> electionViews.add(viewModelService.buildElectionView(election))));
+        electionService.getRunningElections().forEach((election -> electionViews.add(viewModelService.buildElectionView(election, true))));
 
         model.addAttribute("elections", electionViews);
 

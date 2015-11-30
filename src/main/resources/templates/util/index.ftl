@@ -1,9 +1,9 @@
 <#import "spring.ftl" as spring />
 
 <#macro page>
-<html ng-app="app">
+<html>
 <head>
-    <title>ElXion</title>
+    <title>Super NAT</title>
     <link rel="stylesheet" href="vendors/bootstrap/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 </head>

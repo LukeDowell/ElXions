@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.core.authority.AuthorityUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,9 +51,9 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         actionRace.setCandidates(Arrays.asList(funGame, boringGame));
         strategyRace.setCandidates(Collections.singletonList(boringGame));
 
-        SystemUser normalUser = new SystemUser("user", "pass", Collections.singletonList("ROLE_VOTER"));
-        SystemUser admin = new SystemUser("admin", "pass", Collections.singletonList("ROLE_ADMIN"));
-        SystemUser dev = new SystemUser("dev", "pass", Arrays.asList("ROLE_VOTER", "ROLE_ADMIN"));
+        SystemUser normalUser = new SystemUser("user", "pass", AuthorityUtils.createAuthorityList("ROLE_VOTER"));
+        SystemUser admin = new SystemUser("admin", "pass", AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+        SystemUser dev = new SystemUser("dev", "pass", AuthorityUtils.createAuthorityList("ROLE_VOTER", "ROLE_ADMIN"));
 
         userRepository.save(normalUser);
         userRepository.save(admin);

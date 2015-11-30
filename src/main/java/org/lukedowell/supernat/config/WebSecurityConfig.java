@@ -1,9 +1,15 @@
 package org.lukedowell.supernat.config;
 
 import org.lukedowell.supernat.entities.SystemUser;
+import org.lukedowell.supernat.filter.JwtFilter;
 import org.lukedowell.supernat.repositories.SystemUserRepository;
+import org.lukedowell.supernat.services.JwtService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,9 +17,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,17 +34,28 @@ import java.util.Collection;
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
+
     @Autowired
     SystemUserRepository systemUserRepository;
+
+    @Autowired
+    JwtService jwtService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .exceptionHandling().and()
+                .anonymous().and()
+                .servletApi().and()
+                .headers().cacheControl().and().and()
                 .authorizeRequests()
-                    .antMatchers("resources/static/**").permitAll()
-                    .antMatchers("/home").authenticated()
-                    .antMatchers("/api/**").authenticated()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/**/*.css").permitAll()
+                    .antMatchers("/**/*.js").permitAll()
+                    .antMatchers("/api/v1/login").permitAll()
+                    .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
@@ -46,7 +65,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/login")
-                    .permitAll();
+                    .permitAll()
+                    .and()
+
+                .addFilterBefore(new JwtFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
@@ -54,20 +76,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService());
     }
 
+    @Bean
     @Override
-    protected UserDetailsService userDetailsService() {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
         return (username) -> {
 
             SystemUser user = systemUserRepository.findByUsername(username);
+            logger.debug("userDetailsService - authenticating user: {}", user);
 
             if(user != null) {
-
-                Collection<GrantedAuthority> authorities = new ArrayList<>();
-                user.getRoles().forEach((role) -> {
-                    authorities.add(AuthorityUtils.createAuthorityList(role).get(0)); //TODO: gross
-                });
-                return new User(user.getUsername(), user.getPassword(), authorities);
-
+                return user;
             } else {
                 throw new UsernameNotFoundException("The user with username: " + username + " cannot be found.");
             }

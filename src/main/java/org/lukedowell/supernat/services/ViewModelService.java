@@ -28,9 +28,7 @@ public class ViewModelService {
 
         electionView.setTitle(e.getTitle());
         electionView.setId(e.getElectionId());
-        if(recursive) {
-            electionView.setRaces(buildRacesForElection(e, recursive));
-        }
+        electionView.setRaces(buildRacesForElection(e, recursive));
 
         return electionView;
     }
