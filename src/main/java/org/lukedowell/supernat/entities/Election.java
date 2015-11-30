@@ -2,10 +2,11 @@ package org.lukedowell.supernat.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -29,30 +30,29 @@ public class Election {
 
     private String title;
 
-    private Date startDate;
+    private LocalDateTime startDate;
 
-    private Date endDate;
+    private LocalDateTime endDate;
 
     public Election() {}
 
-    public Election(String title, Date endDate) {
-        this(title, new Date(), endDate);
+    public Election(String title, LocalDateTime endDate) {
+        this(title, LocalDateTime.now(), endDate);
     }
 
     public Election(String title) {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), Calendar.NOVEMBER, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-        Date endOfMonth = calendar.getTime();
+        LocalDate now = LocalDate.now();
+        LocalDateTime endOfMonth = now.withDayOfMonth(now.lengthOfMonth()).atTime(23, 59);
 
         this.title = title;
-        this.startDate = new Date();
+        this.startDate = LocalDateTime.now();
         this.endDate = endOfMonth;
     }
 
 
 
-    public Election(String title, Date startDate, Date endDate) {
+    public Election(String title, LocalDateTime startDate, LocalDateTime endDate) {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -82,19 +82,19 @@ public class Election {
         this.title = title;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

@@ -44,4 +44,12 @@ public class ElectionView {
     public void setRaces(Collection<RaceView> races) {
         this.races = races;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder election = new StringBuilder();
+        election.append(String.format("%d -- Election: %s -- Races: ", this.getId(), this.getTitle()));
+        this.getRaces().forEach(race -> election.append(race.toString()));
+        return election.toString();
+    }
 }

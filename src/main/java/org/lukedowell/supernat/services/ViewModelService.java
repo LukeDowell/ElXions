@@ -7,6 +7,8 @@ import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.services.interfaces.IVoteService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ import java.util.List;
 @Service
 public class ViewModelService {
 
+    private static final Logger logger = LoggerFactory.getLogger(ViewModelService.class);
+
     @Autowired
     IVoteService voteService;
 
@@ -29,6 +33,8 @@ public class ViewModelService {
         electionView.setTitle(e.getTitle());
         electionView.setId(e.getElectionId());
         electionView.setRaces(buildRacesForElection(e, recursive));
+
+        logger.debug(electionView.toString());
 
         return electionView;
     }

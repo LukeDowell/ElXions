@@ -2,7 +2,7 @@
 
 <@index.page>
     <!-- VIEW AND ADD NEW GAMES -->
-    <section class="container" ng-controller="GamesController">
+    <section class="container">
         <h1 class="text-center"> GAMES VIEW </h1>
 
         <div class="panel panel-danger">

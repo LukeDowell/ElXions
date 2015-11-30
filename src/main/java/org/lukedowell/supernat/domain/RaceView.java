@@ -44,4 +44,13 @@ public class RaceView {
     public void setGames(Collection<GameCard> games) {
         this.games = games;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder race = new StringBuilder();
+        race.append(String.format("%d -- Race: %s -- Game List: ", this.getId(), this.getTitle()));
+        this.getGames().forEach(game -> race.append(game.toString()));
+
+        return race.toString();
+    }
 }

@@ -47,4 +47,9 @@ public class GameCard {
     public void setNumVotes(int numVotes) {
         this.numVotes = numVotes;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d -- Title: %s -- Votes: %d", this.getId(), this.getTitle(), this.getNumVotes());
+    }
 }

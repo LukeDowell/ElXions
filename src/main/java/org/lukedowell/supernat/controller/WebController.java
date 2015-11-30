@@ -6,6 +6,8 @@ import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.services.ViewModelService;
 import org.lukedowell.supernat.services.interfaces.IElectionService;
 import org.lukedowell.supernat.services.interfaces.IGameService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ import java.util.List;
 @Controller
 public class WebController {
 
+    private static final Logger logger = LoggerFactory.getLogger(WebController.class);
+
     @Autowired
     ViewModelService viewModelService;
 
@@ -37,8 +41,15 @@ public class WebController {
     public String vote(Model model) {
         List<ElectionView> electionViews = new ArrayList<>();
 
+        Collection<Election> runningElections = electionService.getRunningElections();
+
         //Build a view for each running election and add it to our list
-        electionService.getRunningElections().forEach((election -> electionViews.add(viewModelService.buildElectionView(election, true))));
+        runningElections.forEach(((election) -> {
+            ElectionView eView = viewModelService.buildElectionView(election, true);
+            electionViews.add(eView);
+        }));
+
+        logger.debug("webController - electionView: {}", electionViews);
 
         model.addAttribute("elections", electionViews);
 
