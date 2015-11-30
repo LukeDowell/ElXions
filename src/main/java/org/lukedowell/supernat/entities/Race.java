@@ -25,13 +25,8 @@ public class Race {
     @JsonIgnore
     private Election election;
 
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Game.class)
-    @JoinTable(name = "RACE_CANDIDATES",
-            joinColumns=
-            @JoinColumn(name="raceId", referencedColumnName = "raceId"),
-            inverseJoinColumns =
-            @JoinColumn(name="gameId", referencedColumnName = "gameId"))
-    private Collection<Game> candidates;
+    @OneToMany(targetEntity = GameEntry.class, mappedBy = "race")
+    private Collection<GameEntry> entries;
 
     @OneToMany(targetEntity = Vote.class, mappedBy = "race")
     private Collection<Vote> votes;
@@ -48,7 +43,7 @@ public class Race {
 
     @Override
     public String toString() {
-        return title + " race. Number of entrants: " + (candidates != null ? candidates.size() : 0);
+        return title + " race. Number of entrants: " + (entries != null ? entries.size() : 0);
     }
 
     @JsonProperty(value = "electionId")
@@ -80,12 +75,20 @@ public class Race {
         this.election = election;
     }
 
-    public Collection<Game> getCandidates() {
-        return candidates;
+    public Collection<GameEntry> getEntries() {
+        return entries;
     }
 
-    public void setCandidates(Collection<Game> candidates) {
-        this.candidates = candidates;
+    public void setEntries(Collection<GameEntry> entries) {
+        this.entries = entries;
+    }
+
+    public Collection<ParticipationRecord> getRecords() {
+        return records;
+    }
+
+    public void setRecords(Collection<ParticipationRecord> records) {
+        this.records = records;
     }
 
     public Collection<Vote> getVotes() {

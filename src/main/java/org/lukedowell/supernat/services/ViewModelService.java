@@ -5,6 +5,7 @@ import org.lukedowell.supernat.domain.GameCard;
 import org.lukedowell.supernat.domain.RaceView;
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Game;
+import org.lukedowell.supernat.entities.GameEntry;
 import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.services.interfaces.IVoteService;
 import org.slf4j.Logger;
@@ -52,9 +53,8 @@ public class ViewModelService {
         return raceView;
     }
 
-    public GameCard buildGameCard(Game game, long raceId) {
-        long numVotes = voteService.getNumVotes(game.getId(), raceId);
-        return new GameCard(game, numVotes);
+    public GameCard buildGameCard(GameEntry gameEntry) {
+        return new GameCard(gameEntry);
     }
 
     protected Collection<RaceView> buildRacesForElection(Election e, boolean recursive) {
@@ -68,7 +68,7 @@ public class ViewModelService {
     protected Collection<GameCard> buildGamesForRace(Race r) {
         List<GameCard> cards = new ArrayList<>();
 
-        r.getCandidates().forEach((game) -> cards.add(buildGameCard(game, r.getId())));
+        r.getEntries().forEach((gameEntry) -> cards.add(buildGameCard(gameEntry)));
 
         return cards;
     }

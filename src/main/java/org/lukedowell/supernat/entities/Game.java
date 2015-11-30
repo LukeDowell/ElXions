@@ -1,10 +1,10 @@
 package org.lukedowell.supernat.entities;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -22,21 +22,15 @@ public class Game {
     @GenericGenerator(name = "increment", strategy = "increment")
     private long gameId;
 
-    @OneToMany(mappedBy = "game", targetEntity = Vote.class, fetch = FetchType.EAGER)
-    private Collection<Vote> votes;
-
-    @ManyToMany(mappedBy = "candidates", targetEntity = Race.class, fetch = FetchType.EAGER)
-    private Collection<Race> races;
-
     private String title;
 
+    @CreatedDate
     private Date created; //The date the game was added to the library
 
     public Game() {}
 
     public Game(String title) {
         this.title = title;
-        this.created = new Date();
     }
 
     @Override
@@ -58,5 +52,13 @@ public class Game {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

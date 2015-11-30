@@ -1,6 +1,7 @@
 package org.lukedowell.supernat.domain;
 
 import org.lukedowell.supernat.entities.Game;
+import org.lukedowell.supernat.entities.GameEntry;
 
 /**
  *
@@ -18,10 +19,12 @@ public class GameCard {
 
     public GameCard() {}
 
-    public GameCard(Game game, long numVotes) {
+    public GameCard(GameEntry gameEntry) {
+        Game game = gameEntry.getGame();
+
         this.id = game.getId();
         this.title = game.getTitle();
-        this.numVotes = numVotes;
+        this.numVotes = gameEntry.getVotes().size();
     }
 
     public long getId() {

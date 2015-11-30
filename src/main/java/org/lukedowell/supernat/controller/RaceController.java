@@ -1,9 +1,11 @@
 package org.lukedowell.supernat.controller;
 
 import org.lukedowell.supernat.domain.Response;
+import org.lukedowell.supernat.entities.GameEntry;
 import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.services.interfaces.IRaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,5 +31,10 @@ public class RaceController {
     @RequestMapping(method = RequestMethod.POST, value = "/{title}/{electionId}")
     public Response<Race> createRace(@PathVariable("title") String title, @PathVariable("electionId") long electionId) {
         return new Response<>(raceService.createRace(title, electionId));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/entry/{gameId}/{raceId}")
+    public Response<GameEntry> addEntry(@PathVariable("gameId") long gameId, @PathVariable("raceId") long raceId) {
+        return new Response<>(raceService.addEntry(gameId, raceId));
     }
 }

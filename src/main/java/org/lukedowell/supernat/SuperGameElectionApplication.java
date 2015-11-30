@@ -8,6 +8,7 @@ import org.lukedowell.supernat.repositories.ElectionRepository;
 import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.repositories.RaceRepository;
 import org.lukedowell.supernat.repositories.SystemUserRepository;
+import org.lukedowell.supernat.services.interfaces.IRaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -33,6 +34,9 @@ public class SuperGameElectionApplication implements CommandLineRunner{
     @Autowired
     SystemUserRepository userRepository;
 
+    @Autowired
+    IRaceService raceService;
+
     public static void main(String[] args) {
         SpringApplication.run(SuperGameElectionApplication.class, args);
     }
@@ -48,9 +52,6 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         Game funGame = new Game("Fun Game");
         Game boringGame = new Game("Boring Game");
 
-        actionRace.setCandidates(Arrays.asList(funGame, boringGame));
-        strategyRace.setCandidates(Collections.singletonList(boringGame));
-
         SystemUser normalUser = new SystemUser("user", "pass", AuthorityUtils.createAuthorityList("ROLE_VOTER"));
         SystemUser admin = new SystemUser("admin", "pass", AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
         SystemUser dev = new SystemUser("dev", "pass", AuthorityUtils.createAuthorityList("ROLE_VOTER", "ROLE_ADMIN"));
@@ -59,12 +60,17 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         userRepository.save(admin);
         userRepository.save(dev);
 
-        gameRepository.save(funGame);
-        gameRepository.save(boringGame);
+        funGame = gameRepository.save(funGame);
+        boringGame = gameRepository.save(boringGame);
 
         electionRepository.save(election);
 
-        raceRepository.save(actionRace);
-        raceRepository.save(strategyRace);
+        actionRace = raceRepository.save(actionRace);
+        strategyRace = raceRepository.save(strategyRace);
+
+        raceService.addEntry(funGame, actionRace);
+        raceService.addEntry(boringGame, actionRace);
+
+        raceService.addEntry(funGame, strategyRace);
     }
 }

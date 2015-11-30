@@ -21,9 +21,9 @@ public class Vote {
     private long voteId;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "gameId")
+    @JoinColumn(name = "gameEntryId")
     @JsonIgnore
-    private Game game;
+    private GameEntry gameEntry;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "raceId")
@@ -32,9 +32,9 @@ public class Vote {
 
     public Vote() {}
 
-    public Vote(Game game, Race race) {
-        this.game = game;
-        this.race = race;
+    public Vote(GameEntry gameEntry) {
+        this.gameEntry = gameEntry;
+        this.race = gameEntry.getRace();
     }
 
     public long getVoteId() {
@@ -45,12 +45,12 @@ public class Vote {
         this.voteId = voteId;
     }
 
-    public Game getGame() {
-        return game;
+    public GameEntry getGameEntry() {
+        return gameEntry;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGame(GameEntry gameEntry) {
+        this.gameEntry = gameEntry;
     }
 
     public Race getRace() {
