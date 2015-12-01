@@ -9,6 +9,8 @@ import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.repositories.RaceRepository;
 import org.lukedowell.supernat.repositories.VoteRepository;
 import org.lukedowell.supernat.services.interfaces.IVoteService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class VoteService implements IVoteService {
 
+    private static final Logger logger = LoggerFactory.getLogger(VoteService.class);
     @Autowired
     VoteRepository voteRepository;
-
-    @Autowired
-    RaceRepository raceRepository;
 
     @Autowired
     GameEntryRepository gameEntryRepository;
@@ -30,7 +30,6 @@ public class VoteService implements IVoteService {
     @Override
     public Vote vote(long gameEntryId, long race_id) {
         GameEntry gameEntry = gameEntryRepository.findOne(gameEntryId);
-        Race race = raceRepository.findOne(race_id);
         return vote(gameEntry);
     }
 

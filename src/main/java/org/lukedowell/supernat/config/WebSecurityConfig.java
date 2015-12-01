@@ -93,6 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             if(user != null) {
                 return user;
             } else {
+                logger.debug("userDetailsService - Failed to authenticate user: {}", user);
                 throw new UsernameNotFoundException("The user with username: " + username + " cannot be found.");
             }
         };

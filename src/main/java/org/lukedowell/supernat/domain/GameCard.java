@@ -22,7 +22,7 @@ public class GameCard {
     public GameCard(GameEntry gameEntry) {
         Game game = gameEntry.getGame();
 
-        this.id = game.getId();
+        this.id = gameEntry.getGameEntryId();
         this.title = game.getTitle();
         this.numVotes = gameEntry.getVotes().size();
     }

@@ -24,19 +24,17 @@ public class JwtFilter extends GenericFilterBean {
     private final JwtService jwtService;
 
     public JwtFilter(JwtService service) {
-        logger.debug("JwtFilter - jwtService: {}", service);
         this.jwtService = service;
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        logger.debug("doFilter - request: {} response: {} filterChain: {}", request, response, chain);
 
 
         Authentication auth = jwtService.getAuthentication((HttpServletRequest) request);
-        logger.debug("doFilter - auth: {}", auth);
 
         if(auth != null) {
+            logger.debug("doFilter - request: {} response: {} filterChain: {}", request, response, chain);
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
 

@@ -11,14 +11,14 @@ public class RaceView {
 
     private String title;
 
-    private Collection<GameCard> games;
+    private Collection<GameCard> entries;
 
     public RaceView() {}
 
-    public RaceView(long id, String title, Collection<GameCard> games) {
+    public RaceView(long id, String title, Collection<GameCard> entries) {
         this.id = id;
         this.title = title;
-        this.games = games;
+        this.entries = entries;
     }
 
     public long getId() {
@@ -37,19 +37,19 @@ public class RaceView {
         this.title = title;
     }
 
-    public Collection<GameCard> getGames() {
-        return games;
+    public Collection<GameCard> getEntries() {
+        return entries;
     }
 
-    public void setGames(Collection<GameCard> games) {
-        this.games = games;
+    public void setEntries(Collection<GameCard> entries) {
+        this.entries = entries;
     }
 
     @Override
     public String toString() {
         StringBuilder race = new StringBuilder();
         race.append(String.format("%d -- Race: %s -- Game List: ", this.getId(), this.getTitle()));
-        this.getGames().forEach(game -> race.append(game.toString()));
+        this.getEntries().forEach(game -> race.append(game.toString()));
 
         return race.toString();
     }

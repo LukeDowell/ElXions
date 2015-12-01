@@ -4,7 +4,6 @@ import org.lukedowell.supernat.domain.ElectionView;
 import org.lukedowell.supernat.domain.GameCard;
 import org.lukedowell.supernat.domain.RaceView;
 import org.lukedowell.supernat.entities.Election;
-import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.entities.GameEntry;
 import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.services.interfaces.IVoteService;
@@ -47,7 +46,7 @@ public class ViewModelService {
         raceView.setTitle(r.getTitle());
         raceView.setId(r.getId());
         if(includeGames) {
-            raceView.setGames(buildGamesForRace(r));
+            raceView.setEntries(buildGamesForRace(r));
         }
 
         return raceView;

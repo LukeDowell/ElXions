@@ -2,11 +2,10 @@ package org.lukedowell.supernat.controller;
 
 import org.lukedowell.supernat.domain.Response;
 import org.lukedowell.supernat.entities.*;
-import org.lukedowell.supernat.repositories.GameRepository;
-import org.lukedowell.supernat.repositories.RaceRepository;
-import org.lukedowell.supernat.repositories.RecordRepository;
-import org.lukedowell.supernat.repositories.SystemUserRepository;
+import org.lukedowell.supernat.repositories.*;
 import org.lukedowell.supernat.services.interfaces.IVoteService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +21,8 @@ import java.security.Principal;
 @RequestMapping("/api/v1/vote")
 public class VoteController {
 
+    private static final Logger logger = LoggerFactory.getLogger(VoteController.class);
+
     @Autowired
     IVoteService voteService;
 
@@ -29,7 +30,7 @@ public class VoteController {
     RaceRepository raceRepository;
 
     @Autowired
-    GameRepository gameRepository;
+    GameEntryRepository gameEntryRepository;
 
     @Autowired
     SystemUserRepository systemUserRepository;
@@ -38,25 +39,33 @@ public class VoteController {
     RecordRepository recordRepository;
 
 
-    @RequestMapping(method = RequestMethod.POST, value="/{raceId}/{gameId}")
-    public Response<Vote> vote(@PathVariable("raceId") long raceId,
-                               @PathVariable("gameId") long gameId,
+    @RequestMapping(method = RequestMethod.POST, value="/{gameEntryId}")
+    public Response<Vote> vote(@PathVariable("gameEntryId") long gameEntryId,
                                Principal principal) {
+
+        GameEntry entry = gameEntryRepository.findOne(gameEntryId);
 
         //Grab the user and race
         SystemUser user = systemUserRepository.findByUsername(principal.getName());
-        Race race = raceRepository.findOne(raceId);
+        logger.debug("voteController - Vote - User: {}", user);
+
+        Race race = entry.getRace();
+        logger.debug("voteController - Vote - Race: {}", race);
 
         //Allow the vote only if the user hasn't voted in the race already
-        if(recordRepository.findRecord(raceId, user.getUserId()) == null) {
+        if(recordRepository.findRecord(race.getId(), user.getUserId()) == null) {
 
             //Attempt to submit the vote
-            Vote userVote = voteService.vote(raceId, gameId);
+            Vote userVote = voteService.vote(entry);
+            logger.debug("voteController - Vote - UserVote: {}", userVote);
 
             //If it was successful
             if(userVote != null) {
+
                 //Save the participation record
                 ParticipationRecord record = new ParticipationRecord(race, user);
+                logger.debug("voteController - Vote - Record: {}", record);
+
                 recordRepository.save(record);
                 //Return the envelope
                 return new Response<>(userVote);
@@ -69,9 +78,8 @@ public class VoteController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/{raceId}/{gameId}")
-    public Response<Long> numVotes(@PathVariable("raceId") long raceId,
-                                      @PathVariable("gameId") long gameId) {
-        return new Response<>(voteService.getNumVotes(gameId, raceId));
+    @RequestMapping(method = RequestMethod.GET, value="/{gameEntryId}")
+    public Response<Long> numVotes(@PathVariable("gameEntryId") long gameEntryId) {
+        return new Response<>(voteService.getNumVotes(gameEntryId));
     }
 }

@@ -22,7 +22,7 @@ public interface IRaceService {
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
     Collection<Race> getAllRaces();
 
-    @Secured({"ROLE_ADMIN"})
+//    @Secured({"ROLE_ADMIN"}) TODO: uncomment
     GameEntry addEntry(Game game, Race race);
 
     @Secured({"ROLE_ADMIN"})

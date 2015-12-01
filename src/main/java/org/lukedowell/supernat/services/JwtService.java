@@ -52,14 +52,13 @@ public class JwtService {
     }
 
     public Authentication getAuthentication(HttpServletRequest request) {
-        logger.debug("getAuthentication - request: {}", request);
         final String token = request.getHeader(AUTH_HEADER_NAME);
-        logger.debug("getAuthentication - token: {}", token);
 
         if(token != null) {
             final UserDetails user = parseToken(token);
-            logger.debug("getAuthentication - user: {}", user);
             if(user != null) {
+                logger.debug("getAuthentication - token: {}", token);
+                logger.debug("getAuthentication - user: {}", user);
                 return new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
             }
         }

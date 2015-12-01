@@ -12,12 +12,12 @@
                             <h3 class="panel-title">${race.title} -- ${race.id}</h3>
                         </div>
                         <div class="panel-body">
-                            <#list race.games>
+                            <#list race.entries>
                                 <#items as game>
                                     <div class="well col-md-1 col-md-offset-1 text-center gameCard">
                                         <div class="row">${game.title}</div>
-                                        <div class="row">Votes: ${game.numVotes}</div>
-                                        <div class="row"><button type="button" class="btn btn-primary" ng-click="vote(${race.id}, ${game.id})">Vote</button></div>
+                                        <div class="row">Votes: <span class="num-votes">${game.numVotes}</span></div>
+                                        <div class="row"><button type="button" class="btn btn-primary vote-btn" data-entryid="${game.id}">Vote</button></div>
                                     </div>
                                 </#items>
                             </#list>
