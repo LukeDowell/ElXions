@@ -7,8 +7,44 @@ $(document).ready(function() {
     $(".vote-btn").on('click', function() {
         vote($(this));
     });
+
+    $("#submitGameBtn").on('click', function() {
+        submitGame($(this));
+    });
+
 });
 
+function submitGame($el) {
+    var gameTitle = $("#game").val();
+
+    $.ajax("/api/v1/game/" + gameTitle, {
+        type: "POST",
+
+        success: function(response) {
+            console.log(response);
+            switch(response.status) {
+                case 1:
+                    insertNewGame(response.result);
+                    break;
+
+                case 0:
+                    break;
+            }
+        }
+    })
+}
+
+function insertNewGame(game) {
+    var $gameContainer = $("#gameContainer");
+
+    var $gameCard = $("<div/>", {class: "well gameCard"});
+    var $rowOne = $("<div/>", {class: "row"});
+    var $rowTwo = $rowOne.copy();
+
+    //$rowOne.text("Title: ")
+    $gameCard.append($rowOne);
+    $gameCard.append($rowTwo);
+}
 
 /**
  * Attempts to vote on a specific entry

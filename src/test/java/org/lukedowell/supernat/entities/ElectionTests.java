@@ -25,10 +25,9 @@ public class ElectionTests {
     @Autowired
     ElectionRepository electionRepository;
 
-    @Before
-    public void setUp() {
-
+    @Test
+    public void myTest() {
+        assertEquals(1, 1);
     }
-
 
 }

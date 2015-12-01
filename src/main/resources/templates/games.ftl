@@ -13,9 +13,9 @@
                 <form>
                     <div class="form-group">
                         <label for="game">Game Title:</label>
-                        <input type="text" id="game" name="game" class="form-control" ng-model="gameTitle">
+                        <input type="text" id="game" name="game" class="form-control">
                     </div>
-                    <button class="btn btn-primary" type="button" ng-click="submitGame(gameTitle)">Submit!</button>
+                    <button id="submitGameBtn" class="btn btn-primary" type="button">Submit!</button>
                 </form>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="panel-heading">
                 <h2 class="panel-title">Current game library: </h2>
             </div>
-            <div class="panel-body container-fluid">
+            <div id="gameContainer" class="panel-body container-fluid">
                 <#list gameList>
                     <#items as game>
                         <div class="well gameCard">

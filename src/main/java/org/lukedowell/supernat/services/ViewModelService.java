@@ -34,8 +34,6 @@ public class ViewModelService {
         electionView.setId(e.getElectionId());
         electionView.setRaces(buildRacesForElection(e, recursive));
 
-        logger.debug(electionView.toString());
-
         return electionView;
     }
 

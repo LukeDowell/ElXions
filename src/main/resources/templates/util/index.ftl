@@ -16,7 +16,7 @@
                     <li><a href="/">Login</a></li>
                     <li><a href="/logout">Logout</a></li>
                     <li><a href="/home">Home</a></li>
-                    <li><a href="/entries">Games</a></li>
+                    <li><a href="/games">Games</a></li>
                     <li><a href="/vote">Vote</a></li>
                     <li><a href="/admin">Admin</a></li>
                 </ul>
