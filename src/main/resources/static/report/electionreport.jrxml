@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="electionreport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true" uuid="15667776-e55b-463b-b3f3-df2c4accaae1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="185"/>
+	<subDataset name="dataset1" uuid="3bbe9658-f765-44f9-b536-b3a7eb49d45c"/>
+	<parameter name="election_id" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/Users/ldowell/Documents/development/SuperNAT/src/main/resources/static/report/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from election e where e.election_id = $P{election_id}]]>
+	</queryString>
+	<field name="election_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="end_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="start_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="45" uuid="28444d82-3a5e-43b7-8f48-240b51687b46"/>
+				<textElement>
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[Election Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="16" width="258" height="63" uuid="7487d2ad-d377-4afb-91a7-a87a03c03773"/>
+				<textElement>
+					<font size="48"/>
+				</textElement>
+				<text><![CDATA[Super NAT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="16" y="90" width="539" height="1" uuid="3fedd5c5-d190-454f-9bd0-91c4d932509a"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="444" y="16" width="100" height="20" uuid="d954544e-357f-4902-a3dd-0b004a70f8ed"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50">
+			<staticText>
+				<reportElement x="39" y="30" width="100" height="20" uuid="22bc1bac-636e-4f2f-8a5e-e45b5edfd626"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Election ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="30" width="100" height="20" uuid="0c660a3f-9c06-4ee0-8499-a040cbc9c562"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="274" y="30" width="100" height="20" uuid="0d0fdf6e-0acf-4be6-98cb-5f63e5e295b1"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Started On]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="30" width="100" height="20" uuid="72b5bf4b-3e63-467b-8ce9-d38a16cfbe1f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Ended On]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="429" splitType="Stretch">
+			<textField>
+				<reportElement x="39" y="13" width="100" height="20" uuid="65bab70d-a849-4482-a0d2-76bb205719dd"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{election_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="13" width="100" height="20" uuid="2ab76995-ebbc-48e2-af71-5b65e493ab2c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="274" y="13" width="100" height="20" uuid="fb99701d-1f5b-47d6-b44e-17735d2972e3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="13" width="100" height="20" uuid="445234af-b2e5-4e17-96fb-463d1ebb46ef"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{end_date}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="14" y="55" width="541" height="365" uuid="a3d24520-1880-418d-be31-862df2aa60e1"/>
+				<subreportParameter name="election_id">
+					<subreportParameterExpression><![CDATA[$P{election_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "election_racereport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

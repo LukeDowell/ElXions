@@ -4,8 +4,8 @@ import org.lukedowell.supernat.domain.ElectionView;
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.services.ViewModelService;
-import org.lukedowell.supernat.services.interfaces.IElectionService;
-import org.lukedowell.supernat.services.interfaces.IGameService;
+import org.lukedowell.supernat.services.interfaces.ElectionService;
+import org.lukedowell.supernat.services.interfaces.GameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ public class WebController {
     ViewModelService viewModelService;
 
     @Autowired
-    IElectionService electionService;
+    ElectionService electionService;
 
     @Autowired
-    IGameService gameService;
+    GameService gameService;
 
     @RequestMapping("/vote")
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})
@@ -50,7 +50,6 @@ public class WebController {
         }));
 
         logger.debug("webController - electionView: {}", electionViews);
-
         model.addAttribute("elections", electionViews);
 
         return "vote";

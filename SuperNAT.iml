@@ -91,6 +91,6 @@
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-core:4.0.3.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.31" level="project" />
     <orderEntry type="library" name="Gradle: io.jsonwebtoken:jjwt:0.6.0" level="project" />
-    <orderEntry type="library" exported="" name="jasperreports" level="project" />
+    <orderEntry type="library" name="jasperreports" level="project" />
   </component>
 </module>

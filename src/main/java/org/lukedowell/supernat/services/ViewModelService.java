@@ -6,7 +6,7 @@ import org.lukedowell.supernat.domain.RaceView;
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.GameEntry;
 import org.lukedowell.supernat.entities.Race;
-import org.lukedowell.supernat.services.interfaces.IVoteService;
+import org.lukedowell.supernat.services.interfaces.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class ViewModelService {
     private static final Logger logger = LoggerFactory.getLogger(ViewModelService.class);
 
     @Autowired
-    IVoteService voteService;
+    VoteService voteService;
 
     public ElectionView buildElectionView(Election e, boolean recursive) {
         ElectionView electionView = new ElectionView();

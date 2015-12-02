@@ -3,5 +3,4 @@
 .DS_STORE
 build/
 out/
-lib/
 node_modules/

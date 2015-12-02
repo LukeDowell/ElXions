@@ -3,9 +3,8 @@ package org.lukedowell.supernat.controller;
 import org.lukedowell.supernat.domain.Response;
 import org.lukedowell.supernat.entities.GameEntry;
 import org.lukedowell.supernat.entities.Race;
-import org.lukedowell.supernat.services.interfaces.IRaceService;
+import org.lukedowell.supernat.services.interfaces.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +20,7 @@ import java.util.Collection;
 public class RaceController {
 
     @Autowired
-    IRaceService raceService;
+    RaceService raceService;
 
     @RequestMapping(method = RequestMethod.GET)
     public Response<Collection<Race>> getAllRaces() {

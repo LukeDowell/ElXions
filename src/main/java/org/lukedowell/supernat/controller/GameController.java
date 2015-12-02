@@ -3,7 +3,7 @@ package org.lukedowell.supernat.controller;
 import org.lukedowell.supernat.domain.Response;
 import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.repositories.GameRepository;
-import org.lukedowell.supernat.services.interfaces.IGameService;
+import org.lukedowell.supernat.services.interfaces.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +24,7 @@ public class GameController {
     GameRepository gameRepository;
 
     @Autowired
-    IGameService gameService;
+    GameService gameService;
 
     @RequestMapping(method=RequestMethod.POST, value="/{title}")
     public Response<Game> postGame(@PathVariable String title, Principal principal) {

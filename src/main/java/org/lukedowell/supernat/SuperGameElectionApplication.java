@@ -8,15 +8,12 @@ import org.lukedowell.supernat.repositories.ElectionRepository;
 import org.lukedowell.supernat.repositories.GameRepository;
 import org.lukedowell.supernat.repositories.RaceRepository;
 import org.lukedowell.supernat.repositories.SystemUserRepository;
-import org.lukedowell.supernat.services.interfaces.IRaceService;
+import org.lukedowell.supernat.services.interfaces.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.core.authority.AuthorityUtils;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 
 @SpringBootApplication
@@ -35,7 +32,7 @@ public class SuperGameElectionApplication implements CommandLineRunner{
     SystemUserRepository userRepository;
 
     @Autowired
-    IRaceService raceService;
+    RaceService raceService;
 
     public static void main(String[] args) {
         SpringApplication.run(SuperGameElectionApplication.class, args);
