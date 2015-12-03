@@ -4,6 +4,9 @@ buildscript {
     }
     repositories {
         mavenCentral()
+        maven {
+            url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -24,6 +27,9 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {
+        url 'http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/'
+    }
 }
 
 
@@ -33,7 +39,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-security")
 
+    compile('org.olap4j:olap4j:0.9.7.309-JS-3')
+
+    compile("net.sf.jasperreports:jasperreports:6.2.0")
     compile('mysql:mysql-connector-java:5.1.31')
+    compile('com.lowagie:itext:2.1.7')
 
     compile("io.jsonwebtoken:jjwt:0.6.0")
 

@@ -1,5 +1,7 @@
 package org.lukedowell.supernat.controller;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
 import org.lukedowell.supernat.domain.ElectionView;
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Race;
@@ -12,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -54,6 +58,14 @@ public class WebController {
 
         return "vote";
     }
+
+    @RequestMapping("/report")
+    public ModelAndView getReport(ModelMap modelMap) {
+        modelMap.put("election_id", 1);
+        modelMap.put("format", "pdf");
+        return new ModelAndView("rpt_election", modelMap);
+    }
+
 
     @RequestMapping("/home")
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})

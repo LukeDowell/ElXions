@@ -1,11 +1,7 @@
 package org.lukedowell.supernat.repositories;
 
-import org.lukedowell.supernat.entities.Game;
-import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.entities.Vote;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**

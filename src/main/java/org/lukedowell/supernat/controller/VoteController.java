@@ -2,7 +2,10 @@ package org.lukedowell.supernat.controller;
 
 import org.lukedowell.supernat.domain.Response;
 import org.lukedowell.supernat.entities.*;
-import org.lukedowell.supernat.repositories.*;
+import org.lukedowell.supernat.repositories.GameEntryRepository;
+import org.lukedowell.supernat.repositories.RaceRepository;
+import org.lukedowell.supernat.repositories.RecordRepository;
+import org.lukedowell.supernat.repositories.SystemUserRepository;
 import org.lukedowell.supernat.services.interfaces.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

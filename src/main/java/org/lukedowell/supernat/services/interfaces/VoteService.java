@@ -1,8 +1,6 @@
 package org.lukedowell.supernat.services.interfaces;
 
-import org.lukedowell.supernat.entities.Game;
 import org.lukedowell.supernat.entities.GameEntry;
-import org.lukedowell.supernat.entities.Race;
 import org.lukedowell.supernat.entities.Vote;
 import org.springframework.security.access.annotation.Secured;
 
