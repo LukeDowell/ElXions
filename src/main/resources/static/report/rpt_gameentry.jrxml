@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="race_gameentryreport" pageWidth="450" pageHeight="555" orientation="Landscape" columnWidth="450" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e4699676-22fd-4315-bcfd-fe40210f2186">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="race_id" class="java.lang.Integer" isForPrompting="false">
@@ -40,18 +40,15 @@ WHERE
 	<columnHeader>
 		<band height="33">
 			<staticText>
-				<reportElement x="44" y="13" width="100" height="20" uuid="fce03068-67fc-4e8c-b310-b040920e5ab1"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="44" y="13" width="100" height="15" uuid="fce03068-67fc-4e8c-b310-b040920e5ab1"/>
 				<text><![CDATA[Game Entry ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="162" y="13" width="100" height="20" uuid="e04719a4-4de7-407b-820f-26808deae9d3"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="162" y="13" width="100" height="15" uuid="e04719a4-4de7-407b-820f-26808deae9d3"/>
 				<text><![CDATA[Title]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="292" y="13" width="100" height="20" uuid="5f6f25c6-7621-4471-ac54-9b4e7e677ab0"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="292" y="13" width="100" height="15" uuid="5f6f25c6-7621-4471-ac54-9b4e7e677ab0"/>
 				<text><![CDATA[Number of Votes]]></text>
 			</staticText>
 		</band>

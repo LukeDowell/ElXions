@@ -30,9 +30,9 @@
 	<pageHeader>
 		<band height="46" splitType="Stretch">
 			<staticText>
-				<reportElement x="20" y="0" width="122" height="33" uuid="b8e53854-aac6-431d-9791-b164fc808d00"/>
+				<reportElement x="20" y="12" width="44" height="20" uuid="b8e53854-aac6-431d-9791-b164fc808d00"/>
 				<textElement>
-					<font size="14" isBold="false" isItalic="true"/>
+					<font size="14" isBold="false" isItalic="false" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Races]]></text>
 			</staticText>

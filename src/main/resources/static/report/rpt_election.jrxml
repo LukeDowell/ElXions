@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="electionreport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" isIgnorePagination="true" uuid="15667776-e55b-463b-b3f3-df2c4accaae1">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="electionreport" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isTitleNewPage="true" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="15667776-e55b-463b-b3f3-df2c4accaae1">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -28,7 +28,7 @@
 	<title>
 		<band height="64" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="45" uuid="28444d82-3a5e-43b7-8f48-240b51687b46"/>
+				<reportElement x="139" y="11" width="274" height="43" uuid="28444d82-3a5e-43b7-8f48-240b51687b46"/>
 				<textElement>
 					<font size="36"/>
 				</textElement>
@@ -36,43 +36,22 @@
 			</staticText>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="120" splitType="Stretch">
-			<staticText>
-				<reportElement x="16" y="16" width="258" height="63" uuid="7487d2ad-d377-4afb-91a7-a87a03c03773"/>
-				<textElement>
-					<font size="48"/>
-				</textElement>
-				<text><![CDATA[Super NAT]]></text>
-			</staticText>
-			<line>
-				<reportElement x="16" y="90" width="539" height="1" uuid="3fedd5c5-d190-454f-9bd0-91c4d932509a"/>
-				<graphicElement>
-					<pen lineStyle="Double"/>
-				</graphicElement>
-			</line>
-		</band>
-	</pageHeader>
 	<columnHeader>
 		<band height="50">
 			<staticText>
-				<reportElement x="39" y="30" width="100" height="20" uuid="22bc1bac-636e-4f2f-8a5e-e45b5edfd626"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="39" y="20" width="100" height="20" uuid="22bc1bac-636e-4f2f-8a5e-e45b5edfd626"/>
 				<text><![CDATA[Election ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="156" y="30" width="100" height="20" uuid="0c660a3f-9c06-4ee0-8499-a040cbc9c562"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="156" y="20" width="100" height="20" uuid="0c660a3f-9c06-4ee0-8499-a040cbc9c562"/>
 				<text><![CDATA[Title]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="274" y="30" width="100" height="20" uuid="0d0fdf6e-0acf-4be6-98cb-5f63e5e295b1"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="274" y="20" width="100" height="20" uuid="0d0fdf6e-0acf-4be6-98cb-5f63e5e295b1"/>
 				<text><![CDATA[Started On]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="396" y="30" width="100" height="20" uuid="72b5bf4b-3e63-467b-8ce9-d38a16cfbe1f"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="396" y="20" width="100" height="20" uuid="72b5bf4b-3e63-467b-8ce9-d38a16cfbe1f"/>
 				<text><![CDATA[Ended On]]></text>
 			</staticText>
 		</band>
@@ -109,7 +88,4 @@
 			</subreport>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 </jasperReport>

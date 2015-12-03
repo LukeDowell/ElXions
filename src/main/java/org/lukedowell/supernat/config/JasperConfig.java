@@ -1,14 +1,11 @@
 package org.lukedowell.supernat.config;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.view.jasperreports.JasperReportsHtmlView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsViewResolver;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 /**
  * Created by ldowell on 12/3/15.

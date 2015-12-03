@@ -1,7 +1,5 @@
 package org.lukedowell.supernat.controller;
 
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRResultSetDataSource;
 import org.lukedowell.supernat.domain.ElectionView;
 import org.lukedowell.supernat.entities.Election;
 import org.lukedowell.supernat.entities.Race;
@@ -63,9 +61,8 @@ public class WebController {
     public ModelAndView getReport(ModelMap modelMap) {
         modelMap.put("election_id", 1);
         modelMap.put("format", "pdf");
-        return new ModelAndView("rpt_election", modelMap);
+        return new ModelAndView("rpt_dashboard", modelMap);
     }
-
 
     @RequestMapping("/home")
     @Secured({"ROLE_VOTER", "ROLE_ADMIN"})

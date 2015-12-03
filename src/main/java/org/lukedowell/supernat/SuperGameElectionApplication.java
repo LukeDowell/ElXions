@@ -1,13 +1,7 @@
 package org.lukedowell.supernat;
 
-import org.lukedowell.supernat.entities.Election;
-import org.lukedowell.supernat.entities.Game;
-import org.lukedowell.supernat.entities.Race;
-import org.lukedowell.supernat.entities.SystemUser;
-import org.lukedowell.supernat.repositories.ElectionRepository;
-import org.lukedowell.supernat.repositories.GameRepository;
-import org.lukedowell.supernat.repositories.RaceRepository;
-import org.lukedowell.supernat.repositories.SystemUserRepository;
+import org.lukedowell.supernat.entities.*;
+import org.lukedowell.supernat.repositories.*;
 import org.lukedowell.supernat.services.interfaces.RaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -33,6 +27,9 @@ public class SuperGameElectionApplication implements CommandLineRunner{
 
     @Autowired
     RaceService raceService;
+
+    @Autowired
+    VoteRepository voteRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SuperGameElectionApplication.class, args);
@@ -65,9 +62,18 @@ public class SuperGameElectionApplication implements CommandLineRunner{
         actionRace = raceRepository.save(actionRace);
         strategyRace = raceRepository.save(strategyRace);
 
-        raceService.addEntry(funGame, actionRace);
-        raceService.addEntry(boringGame, actionRace);
+        GameEntry entry = raceService.addEntry(funGame, actionRace);
+        GameEntry entryTwo = raceService.addEntry(boringGame, actionRace);
+        GameEntry entryThree = raceService.addEntry(funGame, strategyRace);
 
-        raceService.addEntry(funGame, strategyRace);
+        Vote vote1 = new Vote(entry);
+        Vote vote2 = new Vote(entry);
+        Vote vote3 = new Vote(entryTwo);
+        Vote vote4 = new Vote(entryThree);
+
+        voteRepository.save(vote1);
+        voteRepository.save(vote2);
+        voteRepository.save(vote3);
+        voteRepository.save(vote4);
     }
 }

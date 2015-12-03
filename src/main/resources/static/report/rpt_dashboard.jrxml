@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_dashboard" pageWidth="792" pageHeight="650" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21a133be-e852-4159-8efe-dac7668279a0">
+	<property name="net.sf.jasperreports.chart.theme" value="default"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+	election.election_id,
+	race.race_id,
+	race.title,
+	count(DISTINCT vote.vote_id)
+FROM
+	supernat.election AS election
+JOIN
+	supernat.race race
+ON
+	race.election_id = election.election_id
+JOIN
+	supernat.vote vote
+ON
+	vote.race_id = race.race_id
+GROUP BY
+	race.race_id]]>
+	</queryString>
+	<field name="election_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="race_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="count(DISTINCT vote.vote_id)" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="555" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="114" width="752" height="441" uuid="7726f730-5681-4a0b-8d57-3283c1a6045b"/>
+			</frame>
+			<stackedBar3DChart>
+				<chart evaluationTime="Report">
+					<reportElement isPrintRepeatedValues="false" x="0" y="114" width="752" height="441" uuid="99c1a212-1bfc-4f28-97a9-6274ae716813"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{title}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{race_id}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{count(DISTINCT vote.vote_id)}]]></valueExpression>
+						<labelExpression><![CDATA["Number of Votes"]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA["Number of Votes"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
+			<staticText>
+				<reportElement x="0" y="0" width="278" height="48" uuid="2429cc85-c05b-4465-a3ae-7c7deab12316"/>
+				<textElement>
+					<font fontName="Arial" size="36" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Election Report]]></text>
+			</staticText>
+			<line>
+				<reportElement x="278" y="36" width="474" height="2" uuid="a559e9cb-bf93-4b3a-91cf-7ee0bffdc5c8"/>
+			</line>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="510" y="0" width="242" height="20" uuid="0c4a1e47-fcc2-4c72-8080-af61f6917e8e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="94" width="752" height="20" forecolor="#FFFFFF" backcolor="#0066FF" uuid="46a48c29-1755-421f-9a6f-eb0bfa12c9c7"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Races]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
